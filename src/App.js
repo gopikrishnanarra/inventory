@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios'
 import './App.css'
 
 
@@ -36,6 +36,7 @@ class App extends React.Component {
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
         this.handlePriceChange = this.handlePriceChange.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.saveInventory = this.saveInventory.bind(this);
         this.reset = this.reset.bind(this);
     }
 
@@ -78,6 +79,12 @@ class App extends React.Component {
         event.preventDefault();
     }
 
+    async saveInventory() {
+        console.log('inventory list', this.state.list);
+        const url = 'https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ';
+        return await axios.post(url, this.state.list);
+    }
+
     render() {
         return (
             <div>
@@ -108,6 +115,7 @@ class App extends React.Component {
                     {getList.call(this)}
                 </table>
             </section>
+                <button onClick={this.saveInventory}>save</button>
             </div>
 
 
