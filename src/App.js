@@ -15,6 +15,12 @@ function getList() {
     })
 }
 
+function getInventory() {
+    return this.props.data.inventory.map((obj) => {
+        return obj.item
+    })
+}
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -23,6 +29,7 @@ class App extends React.Component {
             quantity: '',
             price: '',
             list: [],
+            inventory: {}
         };
 
         this.handleItemChange = this.handleItemChange.bind(this);
@@ -30,6 +37,14 @@ class App extends React.Component {
         this.handlePriceChange = this.handlePriceChange.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.reset = this.reset.bind(this);
+    }
+
+    componentDidMount() {
+        fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
+            .then(res => res.json())
+            .then(list => {
+                this.props.getInventory(list);
+            })
     }
 
     handleItemChange(event) {
@@ -65,6 +80,8 @@ class App extends React.Component {
 
     render() {
         return (
+            <div>
+                {getInventory.call(this)}
             <section>
                 <form onSubmit={this.handleAdd}>
                     <label>
@@ -91,6 +108,8 @@ class App extends React.Component {
                     {getList.call(this)}
                 </table>
             </section>
+            </div>
+
 
         );
     }
