@@ -8,13 +8,13 @@ function getList() {
             return (
                 <tr className="td">
                     <td className="td">
-                        <input type="text" onChange={this.handleItem}/>
+                        <input type="text" onChange={this.handleItem} value={object.item}/>
                     </td>
                     <td className="td">
-                        <input type="text" onChange={this.handleQuantity}/>
+                        <input type="text" onChange={this.handleQuantity} value={object.quantity}/>
                     </td>
                     <td className="td">
-                        <input type="text" onChange={this.handlePrice}/>
+                        <input type="text" onChange={this.handlePrice} value={object.price}/>
                     </td>
                 </tr>
             )
