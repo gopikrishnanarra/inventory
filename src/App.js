@@ -1,45 +1,15 @@
 import React from 'react';
-import axios from 'axios'
+
+import AddInventory from './addInventory'
+import InventoryTable from './common/inventoryTable'
 import './App.css'
-
-
-function getList() {
-    return this.state.list.map((object) => {
-        return (
-            <tr className="td">
-                <td className="td">{object.item}</td>
-                <td className="td">{object.quantity}</td>
-                <td className="td">{object.price}</td>
-            </tr>
-        );
-    })
-}
-
-function getInventory() {
-    return this.props.data.inventory.map((obj) => {
-        return obj.item
-    })
-}
+import axios from "axios";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            item: '',
-            quantity: '',
-            price: '',
-            list: [],
-            inventory: {}
-        };
-
-        this.handleItemChange = this.handleItemChange.bind(this);
-        this.handleQuantityChange = this.handleQuantityChange.bind(this);
-        this.handlePriceChange = this.handlePriceChange.bind(this);
-        this.handleAdd = this.handleAdd.bind(this);
-        this.saveInventory = this.saveInventory.bind(this);
-        this.reset = this.reset.bind(this);
+        this.saveEditInventory = this.saveEditInventory.bind(this);
     }
-
     componentDidMount() {
         fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
             .then(res => res.json())
@@ -48,74 +18,41 @@ class App extends React.Component {
             })
     }
 
-    handleItemChange(event) {
-        this.setState({
-            item: event.target.value
-        });
-    }
-    handleQuantityChange(event) {
-        this.setState({
-            quantity: event.target.value
-        });
-    }
-    handlePriceChange(event) {
-        this.setState({
-            price: event.target.value
-        });
-    }
-
-    handleAdd(event) {
-        this.setState({
-            list: this.state.list.concat([{item: this.state.item, quantity: this.state.quantity, price: this.state.price}]),
-        });
-        event.target.value = "";
-        event.preventDefault();
-    }
-
-    reset(event) {
-        this.setState({
-            list: [],
-        });
-        event.preventDefault();
-    }
-
-    async saveInventory() {
-        console.log('inventory list', this.state.list);
+    async saveEditInventory() {
         const url = 'https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ';
-        return await axios.post(url, this.state.list);
+        return await axios.put(url, this.state.list);
     }
 
     render() {
         return (
             <div>
-                {getInventory.call(this)}
-            <section>
-                <form onSubmit={this.handleAdd}>
-                    <label>
-                        Item:
-                        <input type="text"  onChange={this.handleItemChange} />
-                    </label>
-                    <label>
-                        Quantity:
-                        <input type="text"  onChange={this.handleQuantityChange} />
-                    </label>
-                    <label>
-                        Price$:
-                        <input type="text"  onChange={this.handlePriceChange} />
-                    </label>
-                    <input type="submit" value="Add" />
-                </form>
-                <button onClick={this.reset}>reset</button>
-                <table className="table">
-                    <tr className="td">
-                        <th className="th">ITEM</th>
-                        <th className="th">QUANTITY</th>
-                        <th className="th">PRICE ($)</th>
-                    </tr>
-                    {getList.call(this)}
-                </table>
-            </section>
-                <button onClick={this.saveInventory}>save</button>
+                <div className={this.props.data.addEnabled ? "split left": "inventory"}>
+                    <div className="centered">
+                        <InventoryTable
+                         props={this.props}
+                        list={this.props.data.inventory}
+                        />
+                        {!this.props.data.editEnabled &&
+                            <div>
+                        <button onClick={this.props.openAddInventory}>ADD INVENTORY</button>
+
+                        <button onClick={this.props.openEditInventory}>EDIT INVENTORY</button>
+                            </div>}
+                        {this.props.data.editEnabled &&
+                            <div>
+                                <button onClick={this.saveEditInventory}>SAVE</button>
+                                <button onClick={this.props.closeEditInventory}>CLOSE</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                {this.props.data.addEnabled &&
+                <div className="split right">
+                    <div className="centered">
+                        <AddInventory {...this.props}/>
+                    </div>
+                </div>}
             </div>
 
 
