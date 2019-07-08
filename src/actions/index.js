@@ -14,3 +14,22 @@ export const openEditInventory = () => ({
 export const closeEditInventory = () => ({
     type: 'CLOSE_EDIT_INVENTORY'
 });
+export const addInventoryId = (id) => ({
+    type: 'ADD_INVENTORY_ID',
+    id: id
+});
+export const editItem = (id, item) => ({
+    type: 'EDIT_ITEM',
+    id: id,
+    item: item
+});
+export const editQuantity = (id, quantity) => ({
+    type: 'EDIT_QUANTITY',
+    id: id,
+    quantity: quantity
+});
+export const editPrice = (id, price) => ({
+    type: 'EDIT_PRICE',
+    id: id,
+    price: price
+});

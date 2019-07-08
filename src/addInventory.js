@@ -80,7 +80,7 @@ class AddInventory extends React.Component {
                     </form>
                     <button onClick={this.reset}>reset</button>
                     <InventoryTable
-                     props={this.props}
+                        {...this.props}
                     list={this.state.list}
                     />
                     <div>
