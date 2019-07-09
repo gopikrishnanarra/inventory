@@ -1,8 +1,6 @@
 import React from 'react';
 
 import '../App.css'
-import axios from "axios";
-
 
 export default class InventoryTable extends React.Component {
 constructor(props) {
@@ -15,13 +13,6 @@ constructor(props) {
     this.handlePrice = this.handlePrice.bind(this);
 
 }
-
-    async saveEditInventory(id, inventory) {
-    const list = inventory.filter(o => o._id === id);
-    console.log('to be saved', list[0]);
-        const url = `https://api.mlab.com/api/1/databases/inventory/collections/inventory?_id=${id}apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`;
-        return await axios.put(url, list[0]);
-    }
     addInventoryId(object) {
         if (!this.props.props.data.inventoryIds.includes(object._id.$oid)) {
             this.props.props.addInventoryId(object._id.$oid)
@@ -44,22 +35,16 @@ constructor(props) {
 
     }
 
-    async onSave(id) {
-        await this.saveEditInventory(id, this.props.props.data.editedInventory)
-    }
-
     getSaveButton(obj) {
-    console.log(this.props.props.data.inventoryIds);
         if (this.props.props.data.inventoryIds.includes(obj._id.$oid)) {
             return (
-                <button onClick={this.onSave(obj._id.$oid)}>save</button>
+                <button onClick={()=> this.props.save(obj._id.$oid)}>save</button>
             )
         }
         return null;
     }
 
     getList() {
-
         return this.props.list.map((object) => {
             if(this.props.props.data.editEnabled) {
                 return (

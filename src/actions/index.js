@@ -1,5 +1,9 @@
 export const getInventory = (inventory) => ({
-    type: 'GET_MOVIES',
+    type: 'GET_INVENTORY',
+    inventory: inventory
+});
+export const getEditedInventory = (inventory) => ({
+    type: 'GET_EDITED_INVENTORY',
     inventory: inventory
 });
 export const openAddInventory = () => ({

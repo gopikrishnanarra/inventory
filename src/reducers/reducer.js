@@ -7,10 +7,14 @@ const defaultState = {
 };
 
 const reducers = (state = defaultState, action) => {
-    if (action.type === 'GET_MOVIES') {
+    if (action.type === 'GET_INVENTORY') {
         return {
             ...state,
             inventory: action.inventory,
+        };
+    } else if (action.type === 'GET_EDITED_INVENTORY') {
+        return {
+            ...state,
             editedInventory: action.inventory
         };
     } else if (action.type === 'OPEN_ADD_INVENTORY') {
@@ -35,13 +39,11 @@ const reducers = (state = defaultState, action) => {
             editEnabled: false
         };
     } else if (action.type === 'ADD_INVENTORY_ID') {
-        console.log(action);
         return {
             ...state,
             inventoryIds: state.inventoryIds.concat([action.id])
         };
     } else if (action.type === 'EDIT_ITEM') {
-        console.log(action);
         return {
             ...state,
             editedInventory: state.editedInventory.map((inventory) => {
@@ -53,7 +55,6 @@ const reducers = (state = defaultState, action) => {
             })
         };
     } else if (action.type === 'EDIT_QUANTITY') {
-        console.log(action);
         return {
             ...state,
             editedInventory: state.editedInventory.map((inventory) => {
@@ -65,7 +66,6 @@ const reducers = (state = defaultState, action) => {
             })
         };
     } else if (action.type === 'EDIT_PRICE') {
-        console.log(action);
         return {
             ...state,
             editedInventory: state.editedInventory.map((inventory) => {

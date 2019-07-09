@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import {
     getInventory,
+    getEditedInventory,
     openAddInventory,
     closeAddInventory,
     openEditInventory,
@@ -20,6 +21,7 @@ function mapStateToProps(state) {
     }}
 const mapDispatchToProps = dispatch => ({
     getInventory: (inventory) => dispatch(getInventory(inventory)),
+    getEditedInventory: (inventory) => dispatch(getEditedInventory(inventory)),
     addInventoryId: (id) => dispatch(addInventoryId(id)),
     editItem: (id, item) => dispatch(editItem(id, item)),
     editQuantity: (id, quantity) => dispatch(editQuantity(id, quantity)),
