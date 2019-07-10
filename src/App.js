@@ -5,19 +5,28 @@ import InventoryTable from './common/inventoryTable'
 import './App.css'
 import axios from "axios";
 
+function fetchInventory() {
+    fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
+        .then(res => res.json())
+        .then(list => {
+            this.props.getInventory(list);
+        });
+}
+
 class App extends React.Component {
     componentDidMount() {
-        fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
-            .then(res => res.json())
-            .then(list => {
-                this.props.getInventory(list);
-
-            });
+        fetchInventory.call(this)
         fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
             .then(res => res.json())
             .then(list => {
                 this.props.getEditedInventory(list);
             })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.data.getNewInventory) {
+            fetchInventory.call(this);
+        }
     }
 
     async saveEditInventory(id) {

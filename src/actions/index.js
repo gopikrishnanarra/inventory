@@ -12,6 +12,9 @@ export const openAddInventory = () => ({
 export const closeAddInventory = () => ({
     type: 'CLOSE_ADD_INVENTORY'
 });
+export const fetchInventory = () => ({
+    type: 'FETCH_INVENTORY'
+});
 export const openEditInventory = () => ({
     type: 'OPEN_EDIT_INVENTORY'
 });
