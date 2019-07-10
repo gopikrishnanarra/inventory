@@ -9,6 +9,8 @@ import {
     addInventoryId,
     editItem,
     editQuantity,
+    deleteInventoryId,
+    resetInventoryIds,
     editPrice} from '../actions'
 import App from '../App'
 const getInventoryData = (data) => {
@@ -29,7 +31,9 @@ const mapDispatchToProps = dispatch => ({
     openAddInventory: () => dispatch(openAddInventory()),
     closeAddInventory: () => dispatch(closeAddInventory()),
     openEditInventory: () => dispatch(openEditInventory()),
-    closeEditInventory: () => dispatch(closeEditInventory())
+    closeEditInventory: () => dispatch(closeEditInventory()),
+    deleteInventoryId: (id) => dispatch(deleteInventoryId(id)),
+    resetInventoryIds: () => dispatch(resetInventoryIds())
 
 });
 export default connect(

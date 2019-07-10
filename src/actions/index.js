@@ -22,6 +22,13 @@ export const addInventoryId = (id) => ({
     type: 'ADD_INVENTORY_ID',
     id: id
 });
+export const deleteInventoryId = (id) => ({
+    type: 'DELETE_INVENTORY_ID',
+    id: id
+});
+export const resetInventoryIds = () => ({
+    type: 'RESET_INVENTORY_IDS'
+});
 export const editItem = (id, item) => ({
     type: 'EDIT_ITEM',
     id: id,

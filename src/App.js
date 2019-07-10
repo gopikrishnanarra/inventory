@@ -11,15 +11,25 @@ class App extends React.Component {
             .then(res => res.json())
             .then(list => {
                 this.props.getInventory(list);
+
+            });
+        fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
+            .then(res => res.json())
+            .then(list => {
+                this.props.getEditedInventory(list);
             })
     }
 
     async saveEditInventory(id) {
         const list = this.props.data.editedInventory.filter(o => o._id.$oid === id);
-        const payload = list[0];
-        delete payload._id;
         const url = `https://api.mlab.com/api/1/databases/inventory/collections/inventory?_id=${id}apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`;
-        return await axios.put(url, payload);
+        try {
+            await axios.put(url, list[0]);
+            this.props.deleteInventoryId(id);
+        } catch (e){
+            this.props.deleteInventoryId(id);
+            console.log(e.error.message)
+        }
     }
 
     render() {
@@ -29,8 +39,9 @@ class App extends React.Component {
                     <div className="centered">
                         <InventoryTable
                          props={this.props}
-                        list={this.props.data.inventory}
+                         list={this.props.data.inventory}
                          save={this.saveEditInventory}
+                         deleteInventoryId={this.props.deleteInventoryId}
                         />
                         {!this.props.data.editEnabled &&
                             <div>

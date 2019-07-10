@@ -38,7 +38,9 @@ constructor(props) {
     getSaveButton(obj) {
         if (this.props.props.data.inventoryIds.includes(obj._id.$oid)) {
             return (
+                <td>
                 <button onClick={()=> this.props.save(obj._id.$oid)}>save</button>
+                </td>
             )
         }
         return null;

@@ -36,12 +36,23 @@ const reducers = (state = defaultState, action) => {
     } else if (action.type === 'CLOSE_EDIT_INVENTORY') {
         return {
             ...state,
-            editEnabled: false
+            editEnabled: false,
+            inventoryIds: []
         };
     } else if (action.type === 'ADD_INVENTORY_ID') {
         return {
             ...state,
             inventoryIds: state.inventoryIds.concat([action.id])
+        };
+    } else if (action.type === 'DELETE_INVENTORY_ID') {
+        return {
+            ...state,
+            inventoryIds: state.inventoryIds.filter(id => id !== action.id)
+        };
+    } else if (action.type === 'RESET_INVENTORY_IDS') {
+        return {
+            ...state,
+            inventoryIds: []
         };
     } else if (action.type === 'EDIT_ITEM') {
         return {
