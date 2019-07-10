@@ -97,6 +97,15 @@ body {
   border-radius: 50%;
 }
 
+.error {
+  color: red;
+  font-size: small;
+}
+.warning {
+  color: orange;
+  font-size: small;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
