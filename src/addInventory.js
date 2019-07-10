@@ -56,7 +56,8 @@ class AddInventory extends React.Component {
 
     async saveInventory() {
         const url = 'https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ';
-        return await axios.post(url, this.state.list);
+           await axios.post(url, this.state.list);
+           this.props.closeAddInventory();
     }
 
     render() {
@@ -80,7 +81,7 @@ class AddInventory extends React.Component {
                     </form>
                     <button onClick={this.reset}>reset</button>
                     <InventoryTable
-                        {...this.props}
+                    props={this.props}
                     list={this.state.list}
                     />
                     <div>

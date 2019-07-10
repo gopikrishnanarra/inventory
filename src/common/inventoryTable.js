@@ -65,7 +65,7 @@ constructor(props) {
                 )
             }
             return (
-                <tr className="td">
+                <tr key={object.item} className="td">
                     <td className="td">{object.item}</td>
                     <td className="td">{object.quantity}</td>
                     <td className="td">{object.price}</td>
@@ -78,12 +78,14 @@ constructor(props) {
 
         return (
             <table className="table">
+                <tbody>
                 <tr className="td">
                     <th className="th">ITEM</th>
                     <th className="th">QUANTITY</th>
                     <th className="th">PRICE ($)</th>
                 </tr>
                 {this.getList()}
+                </tbody>
             </table>
         )
     }
