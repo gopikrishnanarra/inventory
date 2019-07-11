@@ -54,8 +54,6 @@ class AddInventory extends React.Component {
             });
         }
         if(itemExists) {
-            console.log('addblocked', this.state.addBlocked);
-
             this.setState({
                 addBlocked: true
             })
@@ -113,29 +111,29 @@ class AddInventory extends React.Component {
                             Price$:
                             <input type="text" onChange={this.handlePriceChange}/>
                         </label>
-                        <input type="submit" value="Add To Preview"/>
+                        <input className="button" type="submit" value="Add To Preview"/>
                     </form>
                     {this.state.addBlocked &&
                     <div className="warning">
                         this item is already added to the preview table
                     </div>
                     }
-                    <h3>
+                    <h3 className="header">
                         PREVIEW
                     </h3>
                     <InventoryTable
                     props={this.props}
                     list={this.state.list}
                     />
-                    <button onClick={this.reset}>reset</button>
+                    <button className="button" onClick={this.reset}>reset</button>
                     {this.state.itemDuplicated &&
                     <div className="error">
                         one or more items are already exists in inventory list
                     </div>
                     }
                     <div>
-                    <button onClick={this.saveInventory} disabled={!this.state.saveEnabled}>save</button>
-                        <button onClick={this.props.closeAddInventory}>CLOSE</button>
+                    <button className="button" onClick={this.saveInventory} disabled={!this.state.saveEnabled}>save</button>
+                        <button className="button" onClick={this.props.closeAddInventory}>CLOSE</button>
                     </div>
                 </section>
             </div>

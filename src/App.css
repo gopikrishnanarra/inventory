@@ -20,14 +20,15 @@
 
 .table {
   border-collapse: collapse;
-  border: 1px solid black;
+  border: 1px solid #9E9E9E;
 }
 
 .th {
-  border: 1px solid black;
+  border: 1px solid #9E9E9E;
+  color: #FFC107;
 }
 .td {
-  border: 1px solid black;
+  border: 1px solid #9E9E9E;
 }
 
 .table.a {
@@ -104,6 +105,15 @@ body {
 .warning {
   color: orange;
   font-size: small;
+}
+.button {
+  border-color: #f7fafb;
+  background: #c3c3c0;
+  margin: 2px;
+}
+.header {
+  color: #00BCD4;
+  margin-bottom: 0;
 }
 
 @keyframes App-logo-spin {

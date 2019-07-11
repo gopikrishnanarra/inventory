@@ -39,7 +39,7 @@ constructor(props) {
         if (this.props.props.data.inventoryIds.includes(obj._id.$oid)) {
             return (
                 <td>
-                <button onClick={()=> this.props.save(obj._id.$oid)}>save</button>
+                <button className="button" onClick={()=> this.props.save(obj._id.$oid)}>save</button>
                 </td>
             )
         }

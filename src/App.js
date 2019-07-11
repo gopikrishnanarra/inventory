@@ -53,14 +53,18 @@ class App extends React.Component {
                          deleteInventoryId={this.props.deleteInventoryId}
                         />
                         {!this.props.data.editEnabled &&
+                        <section>
                             <div>
-                        <button onClick={this.props.openAddInventory}>ADD INVENTORY</button>
-
-                        <button onClick={this.props.openEditInventory}>EDIT INVENTORY</button>
-                            </div>}
+                                 <button className="button" onClick={this.props.openAddInventory}>ADD INVENTORY</button>
+                            </div>
+                            <div>
+                                 <button className="button" onClick={this.props.openEditInventory}>EDIT INVENTORY</button>
+                            </div>
+                        </section>
+                        }
                         {this.props.data.editEnabled &&
                             <div>
-                                <button onClick={this.props.closeEditInventory}>CLOSE</button>
+                                <button className="button" onClick={this.props.closeEditInventory}>CLOSE</button>
                             </div>
                         }
                     </div>
