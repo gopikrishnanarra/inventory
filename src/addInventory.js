@@ -30,9 +30,6 @@ class AddInventory extends React.Component {
         this.setState({
             item: event.target.value,
             addBlocked: false
-        }, ()=>{
-            console.log('state changed')
-            console.log(this.state)
         });
     }
     handleQuantityChange(event) {
@@ -54,9 +51,6 @@ class AddInventory extends React.Component {
             this.setState({
                 list: this.state.list.concat([{item: this.state.item, quantity: this.state.quantity, price: this.state.price}]),
                 saveEnabled: true
-            }, ()=>{
-                console.log('item added')
-                console.log(this.state.list)
             });
         }
         if(itemExists) {
@@ -64,8 +58,6 @@ class AddInventory extends React.Component {
 
             this.setState({
                 addBlocked: true
-            }, ()=>{
-                console.log('addblocked', this.state.addBlocked)
             })
         }
         event.preventDefault();
@@ -93,9 +85,6 @@ class AddInventory extends React.Component {
         } else if(array.length > 0) {
             this.setState({
                 itemDuplicated: true
-            }, () => {
-                console.log(this.state.itemDuplicated)
-
             })
         }
     }
@@ -110,7 +99,7 @@ class AddInventory extends React.Component {
     render() {
         return (
             <div>
-                <section>
+                <section className="centered">
                     <form onSubmit={this.handleAdd}>
                         <label>
                             Item:
