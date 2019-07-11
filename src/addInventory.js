@@ -30,6 +30,9 @@ class AddInventory extends React.Component {
         this.setState({
             item: event.target.value,
             addBlocked: false
+        }, ()=>{
+            console.log('state changed')
+            console.log(this.state)
         });
     }
     handleQuantityChange(event) {
@@ -44,25 +47,26 @@ class AddInventory extends React.Component {
     }
 
     handleAdd(event) {
-        this.state.list.forEach((o)=>{
-            if(o.item === this.state.item) {
-                console.log('addblocked', this.state.addBlocked)
-
-                this.setState({
-                    addBlocked: true
-                }, ()=>{
-                    console.log('addblocked', this.state.addBlocked)
-
-                })
-            }
+        const itemExists = this.state.list.find((o)=>{
+            return o.item === this.state.item;
         });
-        if(!this.state.addBlocked) {
+        if(!itemExists && this.state.item.length) {
             this.setState({
                 list: this.state.list.concat([{item: this.state.item, quantity: this.state.quantity, price: this.state.price}]),
                 saveEnabled: true
             }, ()=>{
                 console.log('item added')
+                console.log(this.state.list)
             });
+        }
+        if(itemExists) {
+            console.log('addblocked', this.state.addBlocked);
+
+            this.setState({
+                addBlocked: true
+            }, ()=>{
+                console.log('addblocked', this.state.addBlocked)
+            })
         }
         event.preventDefault();
     }
@@ -70,36 +74,37 @@ class AddInventory extends React.Component {
     reset() {
         this.setState({
             list: [],
-            saveEnabled: false
-        });
-    }
-    checkForDuplicates() {
-        this.props.data.inventory.forEach((o) => {
-            this.state.list.forEach((obj) => {
-                if (o.item === obj.item) {
-                    this.setState({
-                        itemDuplicated: true
-                    }, () => {
-                        console.log(this.state.itemDuplicated)
-
-                    })
-                }
-            })
+            saveEnabled: false,
+            addBlocked: false,
+            itemDuplicated: false
         });
     }
     async saveInventory() {
-        this.checkForDuplicates();
-        await this.save();
+        let array = [];
+        this.state.list.forEach((obj) => {
+            this.props.data.inventory.forEach((o) => {
+                if(o.item === obj.item) {
+                    array.push(obj.item);
+                }
+        });
+        });
+        if(array.length === 0) {
+            await this.save();
+        } else if(array.length > 0) {
+            this.setState({
+                itemDuplicated: true
+            }, () => {
+                console.log(this.state.itemDuplicated)
+
+            })
+        }
     }
 
     async save() {
-        if (!this.state.itemDuplicated) {
-            console.log("saving")
             const url = 'https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ';
             await axios.post(url, this.state.list);
             this.reset();
             this.props.fetchInventory();
-        }
     }
 
     render() {
@@ -126,7 +131,6 @@ class AddInventory extends React.Component {
                         this item is already added to the preview table
                     </div>
                     }
-                    <button onClick={this.reset}>reset</button>
                     <h3>
                         PREVIEW
                     </h3>
@@ -134,10 +138,12 @@ class AddInventory extends React.Component {
                     props={this.props}
                     list={this.state.list}
                     />
+                    <button onClick={this.reset}>reset</button>
                     {this.state.itemDuplicated &&
                     <div className="error">
-                        one or more items are duplicated
-                    </div>}
+                        one or more items are already exists in inventory list
+                    </div>
+                    }
                     <div>
                     <button onClick={this.saveInventory} disabled={!this.state.saveEnabled}>save</button>
                         <button onClick={this.props.closeAddInventory}>CLOSE</button>
