@@ -47,18 +47,32 @@ constructor(props) {
     }
 
     getList() {
-        return this.props.list.map((object) => {
-            if(this.props.props.data.editEnabled) {
+
+    if(this.props.filtered) {
+        if (this.props.filteredInventory.length > 0) {
+            return this.getInventoryTable(this.props.filteredInventory)
+        }
+        return this.getInventoryTable([])
+    }
+        return this.getInventoryTable(this.props.list)
+    }
+
+    getInventoryTable(list) {
+        return list.map((object) => {
+            if (this.props.props.data.editEnabled) {
                 return (
                     <tr className="td">
                         <td className="td">
-                            <input type="text" onChange={(event) => this.handleItem(object, event)} placeholder={object.item}/>
+                            <input type="text" onChange={(event) => this.handleItem(object, event)}
+                                   placeholder={object.item}/>
                         </td>
                         <td className="td">
-                            <input type="text" onChange={(event) => this.handleQuantity(object, event)} placeholder={object.quantity}/>
+                            <input type="text" onChange={(event) => this.handleQuantity(object, event)}
+                                   placeholder={object.quantity}/>
                         </td>
                         <td className="td">
-                            <input type="text" onChange={(event) => this.handlePrice(object, event)} placeholder={object.price}/>
+                            <input type="text" onChange={(event) => this.handlePrice(object, event)}
+                                   placeholder={object.price}/>
                         </td>
                         {this.getSaveButton(object)}
                     </tr>
@@ -71,11 +85,10 @@ constructor(props) {
                     <td className="td">{object.price}</td>
                 </tr>
             );
-        })
+        });
     }
+
     render() {
-
-
         return (
             <table className="table">
                 <tbody>

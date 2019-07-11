@@ -14,6 +14,14 @@ function fetchInventory() {
 }
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            filtered: false,
+            filteredInventory:[]
+        };
+        this.handleFilter = this.handleFilter.bind(this);
+    }
     componentDidMount() {
         fetchInventory.call(this)
         fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
@@ -40,17 +48,33 @@ class App extends React.Component {
             console.log(e.error.message)
         }
     }
-
+    handleFilter(event) {
+        if(event.target.value.length) {
+            const newList = this.props.data.inventory.filter(o=>o.item.includes(event.target.value));
+            this.setState({
+                filtered: true,
+                filteredInventory: newList
+            });
+        }
+        if(!event.target.value.length) {
+            this.setState({
+                filtered: false
+            });
+        }
+    }
     render() {
         return (
             <div>
                 <div className={this.props.data.addEnabled ? "split left": "inventory"}>
                     <div className="centered">
+                        <input className="search" placeholder="search for Item" onChange={this.handleFilter}/>
                         <InventoryTable
                          props={this.props}
                          list={this.props.data.inventory}
                          save={this.saveEditInventory}
                          deleteInventoryId={this.props.deleteInventoryId}
+                         filteredInventory={this.state.filteredInventory}
+                         filtered={this.state.filtered}
                         />
                         {!this.props.data.editEnabled &&
                         <section>

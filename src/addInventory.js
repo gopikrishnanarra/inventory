@@ -29,7 +29,8 @@ class AddInventory extends React.Component {
     handleItemChange(event) {
         this.setState({
             item: event.target.value,
-            addBlocked: false
+            addBlocked: false,
+            itemDuplicated: false
         });
     }
     handleQuantityChange(event) {
