@@ -1,3 +1,13 @@
+export const login = () => ({
+    type: 'LOGIN'
+});
+export const logout = () => ({
+    type: 'LOGOUT'
+});
+export const getUsers = (users) => ({
+    type: 'GET_USERS',
+    users: users
+});
 export const getInventory = (inventory) => ({
     type: 'GET_INVENTORY',
     inventory: inventory

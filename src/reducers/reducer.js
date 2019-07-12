@@ -4,15 +4,32 @@ const defaultState = {
     addEnabled: false,
     editEnabled: false,
     inventoryIds: [],
-    getNewInventory: false
+    getNewInventory: false,
+    loggedIn: false,
+    users: []
 };
 
 const reducers = (state = defaultState, action) => {
-    if (action.type === 'GET_INVENTORY') {
+    if (action.type === 'LOGIN') {
+        return {
+            ...state,
+            loggedIn: true
+        };
+    } else if (action.type === 'LOGOUT') {
+        return {
+            ...state,
+            loggedIn: false
+        };
+    } else if (action.type === 'GET_INVENTORY') {
         return {
             ...state,
             inventory: action.inventory,
             getNewInventory: false
+        };
+    } else if (action.type === 'GET_USERS') {
+        return {
+            ...state,
+            users: action.users
         };
     } else if (action.type === 'GET_EDITED_INVENTORY') {
         return {

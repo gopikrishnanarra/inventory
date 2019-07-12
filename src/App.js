@@ -2,6 +2,7 @@ import React from 'react';
 
 import AddInventory from './addInventory'
 import InventoryTable from './common/inventoryTable'
+import Login from '../src/containers/login'
 import './App.css'
 import axios from "axios";
 
@@ -10,6 +11,13 @@ function fetchInventory() {
         .then(res => res.json())
         .then(list => {
             this.props.getInventory(list);
+        });
+}
+function fetchUsers() {
+    fetch("https://api.mlab.com/api/1/databases/users/collections/users-list?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
+        .then(res => res.json())
+        .then(users => {
+            this.props.getUsers(users);
         });
 }
 
@@ -23,7 +31,8 @@ class App extends React.Component {
         this.handleFilter = this.handleFilter.bind(this);
     }
     componentDidMount() {
-        fetchInventory.call(this)
+        fetchUsers.call(this);
+        fetchInventory.call(this);
         fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
             .then(res => res.json())
             .then(list => {
@@ -63,8 +72,16 @@ class App extends React.Component {
         }
     }
     render() {
+        if (!this.props.data.loggedIn) {
+            return (
+                <Login {...this.props}/>
+            )
+        }
         return (
             <div>
+                <nav className="nav-bar">
+                    <button className="logout" onClick={this.props.logout}>logout</button>
+                </nav>
                 <div className={this.props.data.addEnabled ? "split left": "inventory"}>
                     <div className="centered">
                         <input className="search" placeholder="search for Item" onChange={this.handleFilter}/>

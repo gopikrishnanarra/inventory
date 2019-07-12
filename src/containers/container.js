@@ -1,18 +1,5 @@
 import { connect } from 'react-redux'
-import {
-    getInventory,
-    getEditedInventory,
-    openAddInventory,
-    closeAddInventory,
-    fetchInventory,
-    openEditInventory,
-    closeEditInventory,
-    addInventoryId,
-    editItem,
-    editQuantity,
-    deleteInventoryId,
-    resetInventoryIds,
-    editPrice} from '../actions'
+import * as actions from '../actions'
 import App from '../App'
 const getInventoryData = (data) => {
     return data;
@@ -23,19 +10,23 @@ function mapStateToProps(state) {
         data: getInventoryData(state.data)
     }}
 const mapDispatchToProps = dispatch => ({
-    getInventory: (inventory) => dispatch(getInventory(inventory)),
-    getEditedInventory: (inventory) => dispatch(getEditedInventory(inventory)),
-    addInventoryId: (id) => dispatch(addInventoryId(id)),
-    editItem: (id, item) => dispatch(editItem(id, item)),
-    editQuantity: (id, quantity) => dispatch(editQuantity(id, quantity)),
-    editPrice: (id, price) => dispatch(editPrice(id, price)),
-    openAddInventory: () => dispatch(openAddInventory()),
-    closeAddInventory: () => dispatch(closeAddInventory()),
-    fetchInventory: () => dispatch(fetchInventory()),
-    openEditInventory: () => dispatch(openEditInventory()),
-    closeEditInventory: () => dispatch(closeEditInventory()),
-    deleteInventoryId: (id) => dispatch(deleteInventoryId(id)),
-    resetInventoryIds: () => dispatch(resetInventoryIds())
+    getInventory: (inventory) => dispatch(actions.getInventory(inventory)),
+    getEditedInventory: (inventory) => dispatch(actions.getEditedInventory(inventory)),
+    addInventoryId: (id) => dispatch(actions.addInventoryId(id)),
+    editItem: (id, item) => dispatch(actions.editItem(id, item)),
+    editQuantity: (id, quantity) => dispatch(actions.editQuantity(id, quantity)),
+    editPrice: (id, price) => dispatch(actions.editPrice(id, price)),
+    openAddInventory: () => dispatch(actions.openAddInventory()),
+    closeAddInventory: () => dispatch(actions.closeAddInventory()),
+    fetchInventory: () => dispatch(actions.fetchInventory()),
+    openEditInventory: () => dispatch(actions.openEditInventory()),
+    closeEditInventory: () => dispatch(actions.closeEditInventory()),
+    deleteInventoryId: (id) => dispatch(actions.deleteInventoryId(id)),
+    resetInventoryIds: () => dispatch(actions.resetInventoryIds()),
+    login: () => dispatch(actions.login()),
+    logout: () => dispatch(actions.logout()),
+    addUser: () => dispatch(actions.addUser()),
+    getUsers: (users) => dispatch(actions.getUsers(users)),
 
 });
 export default connect(

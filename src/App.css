@@ -55,7 +55,18 @@ body {
   font-family: Arial;
   color: white;
 }
+.nav-bar {
+  height: 50px;
+  background: #f3f7ca;
+}
+.logout {
+  margin-left: 95%;
+  margin-top: 12px;
+  border-radius: 7px;
+  background: #FF9800;
+}
 .inventory {
+  margin-top: 50px;
   height: 100%;
   width: 100%;
   position: fixed;
@@ -66,6 +77,7 @@ body {
   background-color: #5f5d5d;
 }
 .split {
+  margin-top: 50px;
   height: 100%;
   width: 50%;
   position: fixed;

@@ -12,7 +12,8 @@
     "redux": "^4.0.0"
   },
   "devDependencies": {
-    "config": "^3.1.0"
+    "config": "^3.1.0",
+    "react-bootstrap": "^1.0.0-beta.9"
   },
   "scripts": {
     "start": "react-scripts start",
