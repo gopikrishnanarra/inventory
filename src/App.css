@@ -122,6 +122,11 @@ body {
   border-color: #f7fafb;
   background: #c3c3c0;
   margin: 2px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #c5c58a
 }
 .header {
   color: #00BCD4;

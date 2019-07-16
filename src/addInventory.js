@@ -112,7 +112,7 @@ class AddInventory extends React.Component {
                             Price$:
                             <input type="text" onChange={this.handlePriceChange}/>
                         </label>
-                        <input className="button" type="submit" value="Add To Preview"/>
+                        <button className="button" type="submit">Add To Preview</button>
                     </form>
                     {this.state.addBlocked &&
                     <div className="warning">
@@ -138,8 +138,6 @@ class AddInventory extends React.Component {
                     </div>
                 </section>
             </div>
-
-
         );
     }
 }

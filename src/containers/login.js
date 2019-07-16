@@ -69,7 +69,6 @@ export default class Login extends Component {
                             <Form.Group controlId="email" bsSize="large">
                                 <Form.Control
                                     autoFocus
-                                    type="email"
                                     value={this.state.email}
                                     onChange={this.handleChange}
                                 />
@@ -83,7 +82,8 @@ export default class Login extends Component {
                             </Form.Group>
                             <Button
                                 block
-                                bsSize="large"
+                                bssize="large"
+                                className="button"
                                 disabled={!this.validateForm()}
                                 type="submit"
                             >
