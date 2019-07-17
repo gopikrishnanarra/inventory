@@ -59,7 +59,7 @@ class App extends React.Component {
     }
     handleFilter(event) {
         if(event.target.value.length) {
-            const newList = this.props.data.inventory.filter(o=>o.item.includes(event.target.value));
+            const newList = this.props.data.inventory.filter(o=>o.item.toLowerCase().includes(event.target.value.toLowerCase()));
             this.setState({
                 filtered: true,
                 filteredInventory: newList

@@ -74,7 +74,7 @@ class AddInventory extends React.Component {
         let array = [];
         this.state.list.forEach((obj) => {
             this.props.data.inventory.forEach((o) => {
-                if(o.item === obj.item) {
+                if(o.item.toLowerCase() === obj.item.toLowerCase()) {
                     array.push(obj.item);
                 }
         });

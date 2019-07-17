@@ -55,6 +55,7 @@ export default class Login extends Component {
 
     render() {
             return (
+                <div>
                 <section className="centered">
                     {this.state.userExists === false &&
                     <div className="error">
@@ -66,15 +67,19 @@ export default class Login extends Component {
                     </div>}
                     <div className="Login">
                         <Form onSubmit={this.handleSubmit}>
-                            <Form.Group controlId="email" bsSize="large">
+                            <Form.Group controlId="email" bssize="large">
                                 <Form.Control
+                                    placeholder="userId"
+                                    className="input"
                                     autoFocus
                                     value={this.state.email}
                                     onChange={this.handleChange}
                                 />
                             </Form.Group>
-                            <Form.Group controlId="password" bsSize="large">
+                            <Form.Group controlId="password" bssize="large">
                                 <Form.Control
+                                    placeholder="password"
+                                    className="input"
                                     value={this.state.password}
                                     onChange={this.handleChange}
                                     type="password"
@@ -92,6 +97,7 @@ export default class Login extends Component {
                         </Form>
                     </div>
                 </section>
+                </div>
             );
     }
 }
