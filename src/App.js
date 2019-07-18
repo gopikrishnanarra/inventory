@@ -3,6 +3,7 @@ import React from 'react';
 import AddInventory from './addInventory'
 import InventoryTable from './common/inventoryTable'
 import Login from '../src/containers/login'
+import ResetPassword from '../src/containers/resetPassword'
 import './App.css'
 import axios from "axios";
 
@@ -44,16 +45,18 @@ class App extends React.Component {
         if (this.props.data.getNewInventory) {
             fetchInventory.call(this);
         }
+        if (this.props.data.canGetUsers) {
+            fetchUsers.call(this);
+        }
     }
 
     async saveEditInventory(id) {
         const list = this.props.data.editedInventory.filter(o => o._id.$oid === id);
-        const url = `https://api.mlab.com/api/1/databases/inventory/collections/inventory?_id=${id}apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`;
+        const url = `https://api.mlab.com/api/1/databases/inventory/collections/inventory/${id}?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`;
         try {
             await axios.put(url, list[0]);
             this.props.deleteInventoryId(id);
         } catch (e){
-            this.props.deleteInventoryId(id);
             console.log(e.error.message)
         }
     }
@@ -71,10 +74,16 @@ class App extends React.Component {
             });
         }
     }
+
     render() {
-        if (!this.props.data.loggedIn) {
+        if (!this.props.data.loggedIn && !this.props.data.forgot) {
             return (
                 <Login {...this.props}/>
+            )
+        }
+        if (this.props.data.forgot) {
+            return (
+                <ResetPassword {...this.props}/>
             )
         }
         return (

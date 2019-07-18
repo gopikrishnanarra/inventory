@@ -6,6 +6,8 @@ const defaultState = {
     inventoryIds: [],
     getNewInventory: false,
     loggedIn: false,
+    forgot: false,
+    canGetUsers: false,
     users: []
 };
 
@@ -19,6 +21,11 @@ const reducers = (state = defaultState, action) => {
         return {
             ...state,
             loggedIn: false
+        };
+    }  else if (action.type === 'FORGOT') {
+        return {
+            ...state,
+            forgot: action.value
         };
     } else if (action.type === 'GET_INVENTORY') {
         return {
@@ -50,6 +57,11 @@ const reducers = (state = defaultState, action) => {
         return {
             ...state,
             getNewInventory: true
+        };
+    }  else if (action.type === 'CAN_GET_USERS') {
+        return {
+            ...state,
+            canGetUsers: true
         };
     } else if (action.type === 'OPEN_EDIT_INVENTORY') {
         return {

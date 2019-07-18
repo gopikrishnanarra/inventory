@@ -25,8 +25,10 @@ const mapDispatchToProps = dispatch => ({
     resetInventoryIds: () => dispatch(actions.resetInventoryIds()),
     login: () => dispatch(actions.login()),
     logout: () => dispatch(actions.logout()),
+    forgot: (value) => dispatch(actions.forgot(value)),
     addUser: () => dispatch(actions.addUser()),
     getUsers: (users) => dispatch(actions.getUsers(users)),
+    canGetUsers: () => dispatch(actions.canGetUsers()),
 
 });
 export default connect(

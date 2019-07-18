@@ -6,7 +6,6 @@ import Button from 'react-bootstrap/Button'
 export default class Login extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             email: "",
             password: "",
@@ -17,6 +16,9 @@ export default class Login extends Component {
 
     validateForm() {
         return this.state.email.length > 0 && this.state.password.length > 0;
+    }
+    handleReset() {
+        this.props.forgot(true);
     }
 
     handleChange = event => {
@@ -93,6 +95,9 @@ export default class Login extends Component {
                                 type="submit"
                             >
                                 Login
+                            </Button>
+                            <Button className="button" onClick={()=>this.props.forgot(true)}>
+                                forgot id/password
                             </Button>
                         </Form>
                     </div>

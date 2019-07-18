@@ -4,6 +4,10 @@ export const login = () => ({
 export const logout = () => ({
     type: 'LOGOUT'
 });
+export const forgot = (value) => ({
+    type: 'FORGOT',
+    value: value
+});
 export const getUsers = (users) => ({
     type: 'GET_USERS',
     users: users
@@ -24,6 +28,9 @@ export const closeAddInventory = () => ({
 });
 export const fetchInventory = () => ({
     type: 'FETCH_INVENTORY'
+});
+export const canGetUsers = () => ({
+    type: 'CAN_GET_USERS'
 });
 export const openEditInventory = () => ({
     type: 'OPEN_EDIT_INVENTORY'
