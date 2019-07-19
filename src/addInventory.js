@@ -60,6 +60,7 @@ class AddInventory extends React.Component {
             })
         }
         event.preventDefault();
+        event.target.reset();
     }
 
     reset() {
@@ -106,11 +107,11 @@ class AddInventory extends React.Component {
                         </label>
                         <label>
                             Quantity:
-                            <input type="text" onChange={this.handleQuantityChange}/>
+                            <input type="number" onChange={this.handleQuantityChange}/>
                         </label>
                         <label>
                             Price$:
-                            <input type="text" onChange={this.handlePriceChange}/>
+                            <input type="number" onChange={this.handlePriceChange}/>
                         </label>
                         <button className="button" type="submit">Add To Preview</button>
                     </form>

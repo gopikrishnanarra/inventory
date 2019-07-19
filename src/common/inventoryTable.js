@@ -67,11 +67,11 @@ constructor(props) {
                                    placeholder={object.item}/>
                         </td>
                         <td className="td">
-                            <input type="text" onChange={(event) => this.handleQuantity(object, event)}
+                            <input type="number" onChange={(event) => this.handleQuantity(object, event)}
                                    placeholder={object.quantity}/>
                         </td>
                         <td className="td">
-                            <input type="text" onChange={(event) => this.handlePrice(object, event)}
+                            <input type="number" onChange={(event) => this.handlePrice(object, event)}
                                    placeholder={object.price}/>
                         </td>
                         {this.getSaveButton(object)}
