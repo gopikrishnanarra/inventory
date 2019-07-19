@@ -39,6 +39,14 @@ function getClassName() {
 
 }
 
+function fetchEditedInventory() {
+    fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
+        .then(res => res.json())
+        .then(list => {
+            this.props.getEditedInventory(list);
+        })
+}
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -51,16 +59,13 @@ class App extends React.Component {
     componentDidMount() {
         fetchUsers.call(this);
         fetchInventory.call(this);
-        fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
-            .then(res => res.json())
-            .then(list => {
-                this.props.getEditedInventory(list);
-            })
+        fetchEditedInventory.call(this);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.data.getNewInventory || this.props.data.deleted) {
+        if (this.props.data.getNewInventory || this.props.data.deleted || this.props.data.edited) {
             fetchInventory.call(this);
+            fetchEditedInventory.call(this);
         }
         if (this.props.data.canGetUsers) {
             fetchUsers.call(this);
@@ -72,6 +77,7 @@ class App extends React.Component {
         const url = `https://api.mlab.com/api/1/databases/inventory/collections/inventory/${id}?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`;
         try {
             await axios.put(url, list[0]);
+            this.props.editInventory();
             this.props.deleteInventoryId(id);
         } catch (e){
             console.log(e)

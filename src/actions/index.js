@@ -37,6 +37,9 @@ export const fetchInventory = () => ({
 export const deleteInventory = () => ({
     type: 'DELETE_INVENTORY'
 });
+export const editInventory = () => ({
+    type: 'EDIT_INVENTORY'
+});
 export const canGetUsers = () => ({
     type: 'CAN_GET_USERS'
 });

@@ -13,6 +13,7 @@ const mapDispatchToProps = dispatch => ({
     getInventory: (inventory) => dispatch(actions.getInventory(inventory)),
     getEditedInventory: (inventory) => dispatch(actions.getEditedInventory(inventory)),
     addInventoryId: (id) => dispatch(actions.addInventoryId(id)),
+    editInventory: () => dispatch(actions.editInventory()),
     editItem: (id, item) => dispatch(actions.editItem(id, item)),
     editQuantity: (id, quantity) => dispatch(actions.editQuantity(id, quantity)),
     editPrice: (id, price) => dispatch(actions.editPrice(id, price)),

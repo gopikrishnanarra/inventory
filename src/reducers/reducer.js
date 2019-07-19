@@ -11,7 +11,8 @@ const defaultState = {
     users: [],
     addUser: false,
     user: {},
-    deleted: false
+    deleted: false,
+    edited: false
 };
 
 const reducers = (state = defaultState, action) => {
@@ -41,7 +42,9 @@ const reducers = (state = defaultState, action) => {
         return {
             ...state,
             inventory: action.inventory,
-            getNewInventory: false
+            getNewInventory: false,
+            edited: false,
+            deleted: false
         };
     } else if (action.type === 'GET_USERS') {
         return {
@@ -52,7 +55,9 @@ const reducers = (state = defaultState, action) => {
     } else if (action.type === 'GET_EDITED_INVENTORY') {
         return {
             ...state,
-            editedInventory: action.inventory
+            editedInventory: action.inventory,
+            edited: false,
+            deleted: false
         };
     } else if (action.type === 'OPEN_ADD_INVENTORY') {
         return {
@@ -73,6 +78,11 @@ const reducers = (state = defaultState, action) => {
         return {
             ...state,
             deleted: true
+        };
+    }  else if (action.type === 'EDIT_INVENTORY') {
+        return {
+            ...state,
+            edited: true
         };
     } else if (action.type === 'CAN_GET_USERS') {
         return {
