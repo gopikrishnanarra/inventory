@@ -65,8 +65,13 @@ body {
   height: 50px;
   background: #f3f7ca;
 }
-.logout {
+.nav-section {
   margin-left: 95%;
+}
+.nav-admin-section {
+  margin-left: 90%;
+}
+.nav-button {
   margin-top: 12px;
   border-radius: 7px;
   background: #FF9800;

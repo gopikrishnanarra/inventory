@@ -1,8 +1,13 @@
-export const login = () => ({
-    type: 'LOGIN'
+export const login = (user) => ({
+    type: 'LOGIN',
+    user: user
 });
 export const logout = () => ({
     type: 'LOGOUT'
+});
+export const addUser = (value) => ({
+    type: 'ADD_USER',
+    value: value
 });
 export const forgot = (value) => ({
     type: 'FORGOT',

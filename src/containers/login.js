@@ -10,7 +10,8 @@ export default class Login extends Component {
             email: "",
             password: "",
             passwordMissMatch: "",
-            userExists: ""
+            userExists: "",
+            user: {}
         };
     }
 
@@ -34,18 +35,17 @@ export default class Login extends Component {
             return user.userId === this.state.email
         });
         if (userExists) {
-            const passwordMatched = this.props.data.users.find((user) => {
-                if(user.userId === this.state.email)
-                return user.password === this.state.password
+            this.props.data.users.forEach((user) => {
+                if(user.userId === this.state.email) {
+                    if(user.password === this.state.password) {
+                        this.props.login(user);
+                    }else {
+                        this.setState({
+                            passwordMissMatch: true
+                        })
+                    }
+                }
             });
-            if (passwordMatched) {
-                this.props.login();
-            }
-            if (!passwordMatched) {
-                this.setState({
-                    passwordMissMatch: true
-                })
-            }
         }
         if (!userExists) {
             this.setState({

@@ -4,6 +4,7 @@ import AddInventory from './addInventory'
 import InventoryTable from './common/inventoryTable'
 import Login from '../src/containers/login'
 import ResetPassword from '../src/containers/resetPassword'
+import AddUser from '../src/containers/addUser'
 import './App.css'
 import axios from "axios";
 
@@ -20,6 +21,22 @@ function fetchUsers() {
         .then(users => {
             this.props.getUsers(users);
         });
+}
+
+function getAddUserButton() {
+    if (this.props.data.user.admin === true) {
+        return (
+            <button className="nav-button" onClick={() => this.props.addNewUser(true)}>Add User</button>
+        )
+    }
+}
+
+function getClassName() {
+    if (this.props.data.user.admin === true) {
+        return "nav-admin-section";
+    }
+    return "nav-section";
+
 }
 
 class App extends React.Component {
@@ -86,36 +103,46 @@ class App extends React.Component {
                 <ResetPassword {...this.props}/>
             )
         }
+        if (this.props.data.addUser) {
+            return (
+                <AddUser {...this.props}/>
+            )
+        }
         return (
             <div>
                 <nav className="nav-bar">
-                    <button className="logout" onClick={this.props.logout}>logout</button>
+
+                    <span className={getClassName.call(this)}>
+                        {getAddUserButton.call(this)}
+                        <button className="nav-button" onClick={this.props.logout}>logout</button>
+                    </span>
                 </nav>
-                <div className={this.props.data.addEnabled ? "split left": "inventory"}>
+                <div className={this.props.data.addEnabled ? "split left" : "inventory"}>
                     <div className="centered">
                         <input className="search" placeholder="search for Item" onChange={this.handleFilter}/>
                         <InventoryTable
-                         props={this.props}
-                         list={this.props.data.inventory}
-                         save={this.saveEditInventory}
-                         deleteInventoryId={this.props.deleteInventoryId}
-                         filteredInventory={this.state.filteredInventory}
-                         filtered={this.state.filtered}
+                            props={this.props}
+                            list={this.props.data.inventory}
+                            save={this.saveEditInventory}
+                            deleteInventoryId={this.props.deleteInventoryId}
+                            filteredInventory={this.state.filteredInventory}
+                            filtered={this.state.filtered}
                         />
                         {!this.props.data.editEnabled &&
                         <section>
                             <div>
-                                 <button className="button" onClick={this.props.openAddInventory}>ADD INVENTORY</button>
+                                <button className="button" onClick={this.props.openAddInventory}>ADD INVENTORY</button>
                             </div>
                             <div>
-                                 <button className="button" onClick={this.props.openEditInventory}>EDIT INVENTORY</button>
+                                <button className="button" onClick={this.props.openEditInventory}>EDIT INVENTORY
+                                </button>
                             </div>
                         </section>
                         }
                         {this.props.data.editEnabled &&
-                            <div>
-                                <button className="button" onClick={this.props.closeEditInventory}>CLOSE</button>
-                            </div>
+                        <div>
+                            <button className="button" onClick={this.props.closeEditInventory}>CLOSE</button>
+                        </div>
                         }
                     </div>
                 </div>
@@ -127,8 +154,6 @@ class App extends React.Component {
                     </div>
                 </div>}
             </div>
-
-
         );
     }
 }

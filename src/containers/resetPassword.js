@@ -6,8 +6,6 @@ export default class ResetPassword extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            filtered: false,
-            filteredInventory:[],
             user: "",
             userExists: false,
             reset: false,
@@ -52,8 +50,6 @@ export default class ResetPassword extends React.Component {
 
     cancelReset() {
         this.setState({
-            filtered: false,
-            filteredInventory:[],
             user: "",
             userExists: false,
             reset: false,
@@ -82,7 +78,7 @@ export default class ResetPassword extends React.Component {
     async resetPassword() {
         const updateUserUrl = `https://api.mlab.com/api/1/databases/users/collections/users-list/${this.state.id}?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`
         if(this.state.reset && this.state.id.length > 0) {
-            await axios.put(updateUserUrl,{userId: this.state.user, password: this.state.password});
+            await axios.put(updateUserUrl,{userId: this.state.user, password: this.state.password, admin: false});
             this.setState({
                 userExists: false,
                 reset: false,

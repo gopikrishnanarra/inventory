@@ -23,10 +23,10 @@ const mapDispatchToProps = dispatch => ({
     closeEditInventory: () => dispatch(actions.closeEditInventory()),
     deleteInventoryId: (id) => dispatch(actions.deleteInventoryId(id)),
     resetInventoryIds: () => dispatch(actions.resetInventoryIds()),
-    login: () => dispatch(actions.login()),
+    login: (user) => dispatch(actions.login(user)),
     logout: () => dispatch(actions.logout()),
     forgot: (value) => dispatch(actions.forgot(value)),
-    addUser: () => dispatch(actions.addUser()),
+    addNewUser: (value) => dispatch(actions.addUser(value)),
     getUsers: (users) => dispatch(actions.getUsers(users)),
     canGetUsers: () => dispatch(actions.canGetUsers()),
 

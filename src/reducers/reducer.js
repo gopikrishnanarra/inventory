@@ -8,21 +8,30 @@ const defaultState = {
     loggedIn: false,
     forgot: false,
     canGetUsers: false,
-    users: []
+    users: [],
+    addUser: false,
+    user: {}
 };
 
 const reducers = (state = defaultState, action) => {
     if (action.type === 'LOGIN') {
         return {
             ...state,
-            loggedIn: true
+            loggedIn: true,
+            user: action.user
         };
     } else if (action.type === 'LOGOUT') {
         return {
             ...state,
-            loggedIn: false
+            loggedIn: false,
+            canGetUsers: true
         };
-    }  else if (action.type === 'FORGOT') {
+    }  else if (action.type === 'ADD_USER') {
+        return {
+            ...state,
+            addUser: action.value
+        };
+    } else if (action.type === 'FORGOT') {
         return {
             ...state,
             forgot: action.value
@@ -36,7 +45,8 @@ const reducers = (state = defaultState, action) => {
     } else if (action.type === 'GET_USERS') {
         return {
             ...state,
-            users: action.users
+            users: action.users,
+            canGetUsers: false
         };
     } else if (action.type === 'GET_EDITED_INVENTORY') {
         return {
