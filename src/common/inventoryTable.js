@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 
 import '../App.css'
 
@@ -33,6 +34,15 @@ constructor(props) {
         this.addInventoryId(object);
         this.props.props.editPrice(object._id.$oid, event.target.value)
 
+    }
+    async deleteInventory(id) {
+        const url = `https://api.mlab.com/api/1/databases/inventory/collections/inventory/${id}?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`;
+        try {
+            await axios.delete(url);
+            this.props.props.deleteInventory();
+        } catch (e){
+            console.log(e)
+        }
     }
 
     getSaveButton(obj) {
@@ -78,6 +88,16 @@ constructor(props) {
                     </tr>
                 )
             }
+            if (this.props.props.data.deleteEnabled) {
+                return (
+                    <tr className="td">
+                        <td className="td">{object.item}</td>
+                        <td className="td">
+                            <button className="delete-button" onClick={()=>this.deleteInventory(object._id.$oid)}>delete</button>
+                        </td>
+                    </tr>
+                )
+            }
             return (
                 <tr key={object.item} className="td">
                     <td className="td">{object.item}</td>
@@ -89,6 +109,13 @@ constructor(props) {
     }
 
     render() {
+    if(this.props.props.data.deleteEnabled) {
+        return (
+            <tbody>
+            {this.getList()}
+            </tbody>
+        )
+    }
         return (
             <table className="table">
                 <tbody>

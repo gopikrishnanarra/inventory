@@ -59,7 +59,7 @@ class App extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.data.getNewInventory) {
+        if (this.props.data.getNewInventory || this.props.data.deleted) {
             fetchInventory.call(this);
         }
         if (this.props.data.canGetUsers) {
@@ -74,7 +74,7 @@ class App extends React.Component {
             await axios.put(url, list[0]);
             this.props.deleteInventoryId(id);
         } catch (e){
-            console.log(e.error.message)
+            console.log(e)
         }
     }
     handleFilter(event) {
@@ -128,7 +128,7 @@ class App extends React.Component {
                             filteredInventory={this.state.filteredInventory}
                             filtered={this.state.filtered}
                         />
-                        {!this.props.data.editEnabled &&
+                        {!this.props.data.editEnabled && !this.props.data.deleteEnabled &&
                         <section>
                             <div>
                                 <button className="button" onClick={this.props.openAddInventory}>ADD INVENTORY</button>
@@ -137,11 +137,20 @@ class App extends React.Component {
                                 <button className="button" onClick={this.props.openEditInventory}>EDIT INVENTORY
                                 </button>
                             </div>
+                            <div>
+                                <button className="button" onClick={this.props.openDeleteInventory}>DELETE INVENTORY
+                                </button>
+                            </div>
                         </section>
                         }
                         {this.props.data.editEnabled &&
                         <div>
                             <button className="button" onClick={this.props.closeEditInventory}>CLOSE</button>
+                        </div>
+                        }
+                        {this.props.data.deleteEnabled &&
+                        <div>
+                            <button className="button" onClick={this.props.closeDeleteInventory}>CLOSE</button>
                         </div>
                         }
                     </div>

@@ -34,14 +34,23 @@ export const closeAddInventory = () => ({
 export const fetchInventory = () => ({
     type: 'FETCH_INVENTORY'
 });
+export const deleteInventory = () => ({
+    type: 'DELETE_INVENTORY'
+});
 export const canGetUsers = () => ({
     type: 'CAN_GET_USERS'
 });
 export const openEditInventory = () => ({
     type: 'OPEN_EDIT_INVENTORY'
 });
+export const openDeleteInventory = () => ({
+    type: 'OPEN_DELETE_INVENTORY'
+});
 export const closeEditInventory = () => ({
     type: 'CLOSE_EDIT_INVENTORY'
+});
+export const closeDeleteInventory = () => ({
+    type: 'CLOSE_DELETE_INVENTORY'
 });
 export const addInventoryId = (id) => ({
     type: 'ADD_INVENTORY_ID',

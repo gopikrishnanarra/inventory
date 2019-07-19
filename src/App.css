@@ -135,8 +135,18 @@ body {
   margin: 2px;
   cursor: pointer;
 }
+.delete-button {
+  border-color: #f7fafb;
+  background: #c37042;
+  margin: 2px;
+  cursor: pointer;
+}
 
 button:hover {
+  background: #c5c58a
+}
+
+.delete-button:hover {
   background: #c5c58a
 }
 .header {
