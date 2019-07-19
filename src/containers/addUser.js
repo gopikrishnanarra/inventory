@@ -93,7 +93,7 @@ export default class AddUser extends React.Component {
                         <input placeholder="userId" className="input" onChange={this.setUser}/>
                         <h3 className="info">Please enter password</h3>
                         <input placeholder="password" className="input" onChange={this.setPassword}/>
-                        <h3 className="info">Please enter type of User</h3>
+                        <h3 className="info">Admin access</h3>
                         <input placeholder="true/false" className="input" onChange={this.setAdmin}/>
                         <button className="button" onClick={this.addUser}>Add User</button>
                         <button className="button" onClick={this.cancel}>Cancel</button>
