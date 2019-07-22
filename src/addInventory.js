@@ -19,6 +19,13 @@ class AddInventory extends React.Component {
             saveEnabled: false,
             itemDuplicated: false,
             addBlocked: false,
+            required: {
+                item: true,
+                quantity: true,
+                dollars: true,
+                cents: true
+            },
+            isRequired: false
         };
 
         this.handleItemChange = this.handleItemChange.bind(this);
@@ -31,40 +38,106 @@ class AddInventory extends React.Component {
     }
 
     handleItemChange(event) {
-        this.setState({
-            item: event.target.value,
-            addBlocked: false,
-            itemDuplicated: false
-        });
-    }
-    handleQuantityChange(event) {
-        this.setState({
-            quantity: event.target.value
-        });
-    }
-    handleDollarsChange(event) {
-        this.setState({
-            dollars: event.target.value
-        });
-    }
-    handleCentsChange(event) {
-        if(event.target.value.length < 3) {
+        if(event.target.value.length > 0) {
             this.setState({
-                invalidCents: false,
-                cents: event.target.value
-        });
+                item: event.target.value,
+                addBlocked: false,
+                itemDuplicated: false,
+                required: {
+                    ...this.state.required,
+                    item: false
+                }
+            });
         } else {
             this.setState({
-                invalidCents: true
+                required: {
+                    ...this.state.required,
+                    item: true
+                }
+            })
+        }
+    }
+    handleQuantityChange(event) {
+        if(event.target.value.length > 0) {
+            this.setState({
+                quantity: event.target.value,
+                required: {
+                    ...this.state.required,
+                    quantity: false
+                }
             });
+        } else {
+            this.setState({
+                required: {
+                    ...this.state.required,
+                    quantity: true
+                }
+            })
+        }
+    }
+    handleDollarsChange(event) {
+        if(event.target.value.length > 0) {
+            this.setState({
+                dollars: event.target.value,
+                required: {
+                    ...this.state.required,
+                    dollars: false
+                }
+            });
+        } else {
+            this.setState({
+                required: {
+                    ...this.state.required,
+                    dollars: true
+                }
+            })
+        }
+    }
+    handleCentsChange(event) {
+        if(event.target.value.length > 0) {
+            if (event.target.value.length < 3) {
+                this.setState({
+                    invalidCents: false,
+                    cents: event.target.value,
+                    required: {
+                        ...this.state.required,
+                        cents: false
+                    }
+                });
+            } else {
+                this.setState({
+                    invalidCents: true,
+                    required: {
+                        ...this.state.required,
+                        cents: false
+                    }
+                });
+            }
+        } else {
+            this.setState({
+                required: {
+                    ...this.state.required,
+                    cents: true
+                }
+            })
         }
     }
 
     handleAdd(event) {
-        const itemExists = this.state.list.find((o)=>{
-            return o.item === this.state.item;
-        });
-        if (!itemExists && this.state.item.length) {
+        const { item, quantity, dollars, cents } = this.state.required;
+        if(item || quantity || dollars || cents) {
+            this.setState({
+                isRequired: true
+            })
+        }
+        else {
+            this.setState({
+                isRequired: false
+            });
+            const itemExists = this.state.list.find((o) => {
+                return o.item === this.state.item;
+            });
+            if (!itemExists && this.state.item.length) {
                 this.setState({
                     list: this.state.list.concat([
                         {
@@ -74,25 +147,26 @@ class AddInventory extends React.Component {
                         }
                     ]),
                     saveEnabled: true,
+                    item: "",
+                    quantity: "",
+                    dollars: "",
+                    cents: "",
+                    required: {
+                        item: true,
+                        quantity: true,
+                        dollars: true,
+                        cents: true
+                    },
+                    isRequired: false
                 });
-        // , () => {
-        //         this.setState({
-        //             item: '',
-        //             quantity: '',
-        //             price: "",
-        //             dollars: "",
-        //             cents: "",
-        //             invalidCents: false,
-        //         })
-        //     }
-        }
+                event.target.reset();
+            }
 
-       if (itemExists) {
-            this.setState({
-                addBlocked: true
-            })
-        } else {
-            event.target.reset();
+            if (itemExists) {
+                this.setState({
+                    addBlocked: true
+                })
+            }
         }
         event.preventDefault();
     }
@@ -161,6 +235,9 @@ class AddInventory extends React.Component {
                             <input type="number" placeholder="cents" className="price" onChange={this.handleCentsChange}/>
                             </span>
                         </label>
+                        {this.state.isRequired &&
+                            <div className="error">All fields are required</div>
+                        }
                         <button className="button" type="submit">Add To Preview</button>
                     </form>
                     {this.state.addBlocked &&
