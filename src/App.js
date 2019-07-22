@@ -6,7 +6,6 @@ import Login from '../src/containers/login'
 import ResetPassword from '../src/containers/resetPassword'
 import AddUser from '../src/containers/addUser'
 import './App.css'
-import axios from "axios";
 
 function fetchInventory() {
     fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
@@ -72,17 +71,6 @@ class App extends React.Component {
         }
     }
 
-    async saveEditInventory(id) {
-        const list = this.props.data.editedInventory.filter(o => o._id.$oid === id);
-        const url = `https://api.mlab.com/api/1/databases/inventory/collections/inventory/${id}?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`;
-        try {
-            await axios.put(url, list[0]);
-            this.props.editInventory();
-            this.props.deleteInventoryId(id);
-        } catch (e){
-            console.log(e)
-        }
-    }
     handleFilter(event) {
         if(event.target.value.length) {
             const newList = this.props.data.inventory.filter(o=>o.item.toLowerCase().includes(event.target.value.toLowerCase()));

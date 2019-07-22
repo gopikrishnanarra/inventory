@@ -10,17 +10,21 @@ class AddInventory extends React.Component {
         this.state = {
             item: '',
             quantity: '',
-            price: '',
+            price: "",
+            dollars: "",
+            cents: "",
+            invalidCents: false,
             list: [],
             inventory: {},
             saveEnabled: false,
             itemDuplicated: false,
-            addBlocked: false
+            addBlocked: false,
         };
 
         this.handleItemChange = this.handleItemChange.bind(this);
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
-        this.handlePriceChange = this.handlePriceChange.bind(this);
+        this.handleDollarsChange = this.handleDollarsChange.bind(this);
+        this.handleCentsChange = this.handleCentsChange.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.saveInventory = this.saveInventory.bind(this);
         this.reset = this.reset.bind(this);
@@ -38,37 +42,74 @@ class AddInventory extends React.Component {
             quantity: event.target.value
         });
     }
-    handlePriceChange(event) {
+    handleDollarsChange(event) {
         this.setState({
-            price: event.target.value
+            dollars: event.target.value
         });
+    }
+    handleCentsChange(event) {
+        if(event.target.value.length < 3) {
+            this.setState({
+                invalidCents: false,
+                cents: event.target.value
+        });
+        } else {
+            this.setState({
+                invalidCents: true
+            });
+        }
     }
 
     handleAdd(event) {
         const itemExists = this.state.list.find((o)=>{
             return o.item === this.state.item;
         });
-        if(!itemExists && this.state.item.length) {
-            this.setState({
-                list: this.state.list.concat([{item: this.state.item, quantity: this.state.quantity, price: this.state.price}]),
-                saveEnabled: true
-            });
+        if (!itemExists && this.state.item.length) {
+                this.setState({
+                    list: this.state.list.concat([
+                        {
+                            item: this.state.item,
+                            quantity: this.state.quantity,
+                            price: this.state.dollars + '.' + this.state.cents
+                        }
+                    ]),
+                    saveEnabled: true,
+                });
+        // , () => {
+        //         this.setState({
+        //             item: '',
+        //             quantity: '',
+        //             price: "",
+        //             dollars: "",
+        //             cents: "",
+        //             invalidCents: false,
+        //         })
+        //     }
         }
-        if(itemExists) {
+
+       if (itemExists) {
             this.setState({
                 addBlocked: true
             })
+        } else {
+            event.target.reset();
         }
         event.preventDefault();
-        event.target.reset();
     }
 
     reset() {
         this.setState({
+            item: '',
+            quantity: '',
+            price: "",
+            dollars: "",
+            cents: "",
+            invalidCents: false,
             list: [],
+            inventory: {},
             saveEnabled: false,
+            itemDuplicated: false,
             addBlocked: false,
-            itemDuplicated: false
         });
     }
     async saveInventory() {
@@ -102,16 +143,23 @@ class AddInventory extends React.Component {
                 <section className="centered">
                     <form onSubmit={this.handleAdd}>
                         <label>
-                            Item:
+                            <div>Item:</div>
                             <input type="text" onChange={this.handleItemChange}/>
                         </label>
                         <label>
-                            Quantity:
+                            <div>Quantity:</div>
                             <input type="number" onChange={this.handleQuantityChange}/>
                         </label>
                         <label>
-                            Price$:
-                            <input type="number" onChange={this.handlePriceChange}/>
+                            <div>Price$:</div>
+                            {this.state.invalidCents &&
+                                <div className="error">max cents allowed 2 digits</div>
+                            }
+                            <span>
+                            <input type="number" placeholder="$" className="price" onChange={this.handleDollarsChange}/>
+                            <span>.</span>
+                            <input type="number" placeholder="cents" className="price" onChange={this.handleCentsChange}/>
+                            </span>
                         </label>
                         <button className="button" type="submit">Add To Preview</button>
                     </form>
