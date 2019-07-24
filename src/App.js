@@ -121,6 +121,7 @@ class App extends React.Component {
                             deleteInventoryId={this.props.deleteInventoryId}
                             filteredInventory={this.state.filteredInventory}
                             filtered={this.state.filtered}
+                            canDelete={false}
                         />
                         {!this.props.data.editEnabled && !this.props.data.deleteEnabled &&
                         <section>

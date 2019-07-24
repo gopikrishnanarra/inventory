@@ -155,6 +155,12 @@ constructor(props) {
                     <td className="td">{object.item}</td>
                     <td className="td">{object.quantity}</td>
                     <td className="td">{object.price}</td>
+                    <td className="td">
+                    { this.props.canDelete &&
+                        <button className="delete-button" onClick={()=>this.props.props.removeFromPreview(object)}>remove</button>
+                    }
+                    </td>
+
                 </tr>
             );
         });

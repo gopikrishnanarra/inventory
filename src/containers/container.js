@@ -11,6 +11,9 @@ function mapStateToProps(state) {
     }}
 const mapDispatchToProps = dispatch => ({
     getInventory: (inventory) => dispatch(actions.getInventory(inventory)),
+    previewAddList: (list) => dispatch(actions.previewList(list)),
+    removeFromPreview: (object) => dispatch(actions.editPreview(object)),
+    resetPreview: () => dispatch(actions.resetPreviewList()),
     getEditedInventory: (inventory) => dispatch(actions.getEditedInventory(inventory)),
     addInventoryId: (id) => dispatch(actions.addInventoryId(id)),
     editInventory: () => dispatch(actions.editInventory()),
@@ -31,6 +34,7 @@ const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(actions.logout()),
     forgot: (value) => dispatch(actions.forgot(value)),
     addNewUser: (value) => dispatch(actions.addUser(value)),
+    duplicatedItem: (value) => dispatch(actions.duplicatedItem(value)),
     getUsers: (users) => dispatch(actions.getUsers(users)),
     canGetUsers: () => dispatch(actions.canGetUsers()),
 

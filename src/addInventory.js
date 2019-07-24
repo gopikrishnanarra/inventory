@@ -14,7 +14,6 @@ class AddInventory extends React.Component {
             dollars: "",
             cents: "",
             invalidCents: false,
-            list: [],
             inventory: {},
             saveEnabled: false,
             itemDuplicated: false,
@@ -37,8 +36,17 @@ class AddInventory extends React.Component {
         this.reset = this.reset.bind(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.saveEnabled === true && this.props.data.previewList.length === 0) {
+            this.setState({
+                saveEnabled: false
+            })
+        }
+    }
+
     handleItemChange(event) {
         if(event.target.value.length > 0) {
+            this.props.duplicatedItem(false);
             this.setState({
                 item: event.target.value,
                 addBlocked: false,
@@ -134,32 +142,39 @@ class AddInventory extends React.Component {
             this.setState({
                 isRequired: false
             });
-            const itemExists = this.state.list.find((o) => {
+            const itemExists = this.props.data.previewList.find((o) => {
                 return o.item === this.state.item;
             });
+            const itemDuplicated = this.props.data.inventory.find((o)=>{
+                return o.item  === this.state.item;
+            });
             if (!itemExists && this.state.item.length) {
-                this.setState({
-                    list: this.state.list.concat([
+                if (itemDuplicated) {
+                    this.props.duplicatedItem(true);
+                } else if(!itemDuplicated) {
+                    this.props.previewAddList([
                         {
                             item: this.state.item,
                             quantity: this.state.quantity,
                             price: this.state.dollars + '.' + this.state.cents
                         }
-                    ]),
-                    saveEnabled: true,
-                    item: "",
-                    quantity: "",
-                    dollars: "",
-                    cents: "",
-                    required: {
-                        item: true,
-                        quantity: true,
-                        dollars: true,
-                        cents: true
-                    },
-                    isRequired: false
-                });
-                event.target.reset();
+                    ]);
+                    this.setState({
+                        saveEnabled: true,
+                        item: "",
+                        quantity: "",
+                        dollars: "",
+                        cents: "",
+                        required: {
+                            item: true,
+                            quantity: true,
+                            dollars: true,
+                            cents: true
+                        },
+                        isRequired: false
+                    });
+                    event.target.reset();
+                }
             }
 
             if (itemExists) {
@@ -172,6 +187,8 @@ class AddInventory extends React.Component {
     }
 
     reset() {
+        this.props.resetPreview();
+        this.props.duplicatedItem(false);
         this.setState({
             item: '',
             quantity: '',
@@ -179,7 +196,6 @@ class AddInventory extends React.Component {
             dollars: "",
             cents: "",
             invalidCents: false,
-            list: [],
             inventory: {},
             saveEnabled: false,
             itemDuplicated: false,
@@ -187,31 +203,18 @@ class AddInventory extends React.Component {
         });
     }
     async saveInventory() {
-        let array = [];
-        this.state.list.forEach((obj) => {
-            this.props.data.inventory.forEach((o) => {
-                if(o.item.toLowerCase() === obj.item.toLowerCase()) {
-                    array.push(obj.item);
-                }
-        });
-        });
-        if(array.length === 0) {
             await this.save();
-        } else if(array.length > 0) {
-            this.setState({
-                itemDuplicated: true
-            })
-        }
     }
 
     async save() {
             const url = 'https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ';
-            await axios.post(url, this.state.list);
+            await axios.post(url, this.props.data.previewList);
             this.reset();
             this.props.fetchInventory();
     }
 
     render() {
+        console.log('quantity', this.state.quantity);
         return (
             <div>
                 <section className="centered">
@@ -245,19 +248,20 @@ class AddInventory extends React.Component {
                         this item is already added to the preview table
                     </div>
                     }
+                    {this.props.data.itemDuplicated &&
+                    <div className="warning">
+                        this item is already exists in inventory
+                    </div>
+                    }
                     <h3 className="header">
                         PREVIEW
                     </h3>
                     <InventoryTable
                     props={this.props}
-                    list={this.state.list}
+                    list={this.props.data.previewList}
+                    canDelete={true}
                     />
                     <button className="button" onClick={this.reset}>reset</button>
-                    {this.state.itemDuplicated &&
-                    <div className="error">
-                        one or more items are already exists in inventory list
-                    </div>
-                    }
                     <div>
                     <button className="button" onClick={this.saveInventory} disabled={!this.state.saveEnabled}>save</button>
                         <button className="button" onClick={this.props.closeAddInventory}>CLOSE</button>

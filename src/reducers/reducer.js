@@ -1,5 +1,6 @@
 const defaultState = {
     inventory: [],
+    previewList: [],
     editedInventory: [],
     addEnabled: false,
     editEnabled: false,
@@ -10,6 +11,7 @@ const defaultState = {
     canGetUsers: false,
     users: [],
     addUser: false,
+    itemDuplicated: false,
     user: {},
     deleted: false,
     edited: false
@@ -33,6 +35,11 @@ const reducers = (state = defaultState, action) => {
             ...state,
             addUser: action.value
         };
+    }  else if (action.type === 'DUPLICATED_ITEM') {
+        return {
+            ...state,
+            itemDuplicated: action.value
+        };
     } else if (action.type === 'FORGOT') {
         return {
             ...state,
@@ -45,6 +52,21 @@ const reducers = (state = defaultState, action) => {
             getNewInventory: false,
             edited: false,
             deleted: false
+        };
+    } else if (action.type === 'PREVIEW_LIST') {
+        return {
+            ...state,
+            previewList: state.previewList.concat(action.list)
+        };
+    } else if (action.type === 'EDIT_PREVIEW_LIST') {
+        return {
+            ...state,
+            previewList: state.previewList.filter(o => o.item !== action.object.item)
+        };
+    } else if (action.type === 'RESET_PREVIEW_LIST') {
+        return {
+            ...state,
+            previewList: []
         };
     } else if (action.type === 'GET_USERS') {
         return {

@@ -9,6 +9,10 @@ export const addUser = (value) => ({
     type: 'ADD_USER',
     value: value
 });
+export const duplicatedItem = (value) => ({
+    type: 'DUPLICATED_ITEM',
+    value: value
+});
 export const forgot = (value) => ({
     type: 'FORGOT',
     value: value
@@ -20,6 +24,17 @@ export const getUsers = (users) => ({
 export const getInventory = (inventory) => ({
     type: 'GET_INVENTORY',
     inventory: inventory
+});
+export const previewList = (list) => ({
+    type: 'PREVIEW_LIST',
+    list: list
+});
+export const editPreview = (object) => ({
+    type: 'EDIT_PREVIEW_LIST',
+    object: object
+});
+export const resetPreviewList = () => ({
+    type: 'RESET_PREVIEW_LIST'
 });
 export const getEditedInventory = (inventory) => ({
     type: 'GET_EDITED_INVENTORY',
