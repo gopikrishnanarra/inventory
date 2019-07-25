@@ -5,6 +5,9 @@ export const login = (user) => ({
 export const logout = () => ({
     type: 'LOGOUT'
 });
+export const getLogin = () => ({
+    type: 'GET_LOGIN'
+});
 export const addUser = (value) => ({
     type: 'ADD_USER',
     value: value
@@ -61,14 +64,11 @@ export const canGetUsers = () => ({
 export const openEditInventory = () => ({
     type: 'OPEN_EDIT_INVENTORY'
 });
-export const openDeleteInventory = () => ({
-    type: 'OPEN_DELETE_INVENTORY'
+export const openInventory = () => ({
+    type: 'OPEN_INVENTORY'
 });
 export const closeEditInventory = () => ({
     type: 'CLOSE_EDIT_INVENTORY'
-});
-export const closeDeleteInventory = () => ({
-    type: 'CLOSE_DELETE_INVENTORY'
 });
 export const addInventoryId = (id) => ({
     type: 'ADD_INVENTORY_ID',

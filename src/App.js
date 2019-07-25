@@ -30,6 +30,14 @@ function getAddUserButton() {
     }
 }
 
+function getLoginButton() {
+    if (this.props.data.loggedIn === false) {
+        return (
+            <button className="nav-button" onClick={this.props.getLogin}>login</button>
+        )
+    }
+}
+
 function getClassName() {
     if (this.props.data.user.admin === true) {
         return "nav-admin-section";
@@ -111,7 +119,26 @@ class App extends React.Component {
                         <button className="nav-button" onClick={this.props.logout}>logout</button>
                     </span>
                 </nav>
-                <div className={this.props.data.addEnabled ? "split left" : "inventory"}>
+                <div className="split left">
+                    <div className="side-panel">
+                        <section>
+                            <div>
+                                <button className="side-button" onClick={this.props.openInventory}>INVENTORY
+                                </button>
+                            </div>
+                            <div>
+                                <button className="side-button" onClick={this.props.openAddInventory}>ADD INVENTORY</button>
+                            </div>
+                            <div>
+                                <button className="side-button" onClick={this.props.openEditInventory}>EDIT INVENTORY
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+                {!this.props.data.addEnabled &&
+                <div className="split right">
                     <div className="centered">
                         <input className="search" placeholder="search for Item" onChange={this.handleFilter}/>
                         <InventoryTable
@@ -123,33 +150,14 @@ class App extends React.Component {
                             filtered={this.state.filtered}
                             canDelete={false}
                         />
-                        {!this.props.data.editEnabled && !this.props.data.deleteEnabled &&
-                        <section>
-                            <div>
-                                <button className="button" onClick={this.props.openAddInventory}>ADD INVENTORY</button>
-                            </div>
-                            <div>
-                                <button className="button" onClick={this.props.openEditInventory}>EDIT INVENTORY
-                                </button>
-                            </div>
-                            <div>
-                                <button className="button" onClick={this.props.openDeleteInventory}>DELETE INVENTORY
-                                </button>
-                            </div>
-                        </section>
-                        }
                         {this.props.data.editEnabled &&
                         <div>
                             <button className="button" onClick={this.props.closeEditInventory}>CLOSE</button>
                         </div>
                         }
-                        {this.props.data.deleteEnabled &&
-                        <div>
-                            <button className="button" onClick={this.props.closeDeleteInventory}>CLOSE</button>
-                        </div>
-                        }
                     </div>
                 </div>
+                }
 
                 {this.props.data.addEnabled &&
                 <div className="split right">

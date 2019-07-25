@@ -4,6 +4,7 @@ const defaultState = {
     editedInventory: [],
     addEnabled: false,
     editEnabled: false,
+    inventoryEnabled: false,
     inventoryIds: [],
     getNewInventory: false,
     loggedIn: false,
@@ -22,12 +23,20 @@ const reducers = (state = defaultState, action) => {
         return {
             ...state,
             loggedIn: true,
+            getLoginPage: false,
             user: action.user
         };
     } else if (action.type === 'LOGOUT') {
         return {
             ...state,
             loggedIn: false,
+            getLoginPage: false,
+            canGetUsers: true
+        };
+    } else if (action.type === 'GET_LOGIN') {
+        return {
+            ...state,
+            getLoginPage: true,
             canGetUsers: true
         };
     }  else if (action.type === 'ADD_USER') {
@@ -84,12 +93,14 @@ const reducers = (state = defaultState, action) => {
     } else if (action.type === 'OPEN_ADD_INVENTORY') {
         return {
             ...state,
-            addEnabled: true
+            addEnabled: true,
+            inventoryEnabled: false
         };
     } else if (action.type === 'CLOSE_ADD_INVENTORY') {
         return {
             ...state,
-            addEnabled: false
+            addEnabled: false,
+            inventoryEnabled: true
         };
     } else if (action.type === 'FETCH_INVENTORY') {
         return {
@@ -116,29 +127,22 @@ const reducers = (state = defaultState, action) => {
             ...state,
             editEnabled: true,
             addEnabled: false,
-            deleteEnabled: false
-
+            inventoryEnabled: false
         };
-    }  else if (action.type === 'OPEN_DELETE_INVENTORY') {
+    }  else if (action.type === 'OPEN_INVENTORY') {
         return {
             ...state,
             editEnabled: false,
             addEnabled: false,
-            deleteEnabled: true
+            inventoryEnabled: true
         };
     } else if (action.type === 'CLOSE_EDIT_INVENTORY') {
         return {
             ...state,
             editEnabled: false,
             inventoryIds: [],
-            getNewInventory: true
-        };
-    } else if (action.type === 'CLOSE_DELETE_INVENTORY') {
-        return {
-            ...state,
-            deleteEnabled: false,
-            inventoryIds: [],
-            getNewInventory: true
+            getNewInventory: true,
+            inventoryEnabled: true
         };
     } else if (action.type === 'ADD_INVENTORY_ID') {
         return {

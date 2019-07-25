@@ -63,7 +63,7 @@ body {
 }
 .nav-bar {
   height: 50px;
-  background: #f3f7ca;
+  background: #607D8B;
 }
 .nav-section {
   margin-left: 95%;
@@ -90,7 +90,6 @@ body {
 .split {
   margin-top: 50px;
   height: 100%;
-  width: 50%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -99,11 +98,13 @@ body {
 }
 
 .left {
+  width: 20%;
   left: 0;
   background-color: #5f5d5d;
 }
 
 .right {
+  width: 80%;
   right: 0;
   background-color: rgba(25, 17, 8, 0.83);
 }
@@ -112,6 +113,15 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.side-panel {
+  position: absolute;
+  top: 100px;
+  margin-left: 50%;
+  margin-right: 5px;
   transform: translate(-50%, -50%);
   text-align: center;
 }
@@ -135,6 +145,15 @@ body {
   margin: 2px;
   cursor: pointer;
 }
+.side-button {
+  width: 100%;
+  border-color: #f7fafb;
+  background: #c5c58a;
+  cursor: pointer;
+  margin: 2px;
+  border-radius: 12px;
+  font-style: italic;
+}
 .delete-button {
   border-color: #f7fafb;
   background: #c37042;
@@ -148,6 +167,9 @@ button:hover {
 
 .delete-button:hover {
   background: #c5c58a
+}
+.side-button:hover {
+  background: #607D8B
 }
 .header {
   color: #00BCD4;

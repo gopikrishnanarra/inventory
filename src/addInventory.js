@@ -16,7 +16,6 @@ class AddInventory extends React.Component {
             invalidCents: false,
             inventory: {},
             saveEnabled: false,
-            itemDuplicated: false,
             addBlocked: false,
             required: {
                 item: true,
@@ -46,16 +45,23 @@ class AddInventory extends React.Component {
 
     handleItemChange(event) {
         if(event.target.value.length > 0) {
-            this.props.duplicatedItem(false);
-            this.setState({
-                item: event.target.value,
-                addBlocked: false,
-                itemDuplicated: false,
-                required: {
-                    ...this.state.required,
-                    item: false
-                }
+            const itemDuplicated = this.props.data.inventory.find((o)=>{
+                return o.item  === event.target.value;
             });
+            if (itemDuplicated) {
+                this.props.duplicatedItem(true);
+            } else {
+                this.props.duplicatedItem(false);
+                this.setState({
+                    item: event.target.value,
+                    addBlocked: false,
+                    required: {
+                        ...this.state.required,
+                        item: false
+                    }
+                });
+            }
+
         } else {
             this.setState({
                 required: {
@@ -145,36 +151,29 @@ class AddInventory extends React.Component {
             const itemExists = this.props.data.previewList.find((o) => {
                 return o.item === this.state.item;
             });
-            const itemDuplicated = this.props.data.inventory.find((o)=>{
-                return o.item  === this.state.item;
-            });
             if (!itemExists && this.state.item.length) {
-                if (itemDuplicated) {
-                    this.props.duplicatedItem(true);
-                } else if(!itemDuplicated) {
-                    this.props.previewAddList([
-                        {
-                            item: this.state.item,
-                            quantity: this.state.quantity,
-                            price: this.state.dollars + '.' + this.state.cents
-                        }
-                    ]);
-                    this.setState({
-                        saveEnabled: true,
-                        item: "",
-                        quantity: "",
-                        dollars: "",
-                        cents: "",
-                        required: {
-                            item: true,
-                            quantity: true,
-                            dollars: true,
-                            cents: true
-                        },
-                        isRequired: false
-                    });
-                    event.target.reset();
-                }
+                this.props.previewAddList([
+                    {
+                        item: this.state.item,
+                        quantity: this.state.quantity,
+                        price: this.state.dollars + '.' + this.state.cents
+                    }
+                ]);
+                this.setState({
+                    saveEnabled: true,
+                    item: "",
+                    quantity: "",
+                    dollars: "",
+                    cents: "",
+                    required: {
+                        item: true,
+                        quantity: true,
+                        dollars: true,
+                        cents: true
+                    },
+                    isRequired: false
+                });
+                event.target.reset();
             }
 
             if (itemExists) {
@@ -198,7 +197,6 @@ class AddInventory extends React.Component {
             invalidCents: false,
             inventory: {},
             saveEnabled: false,
-            itemDuplicated: false,
             addBlocked: false,
         });
     }
@@ -214,18 +212,22 @@ class AddInventory extends React.Component {
     }
 
     render() {
-        console.log('quantity', this.state.quantity);
         return (
             <div>
                 <section className="centered">
                     <form onSubmit={this.handleAdd}>
                         <label>
                             <div>Item:</div>
-                            <input type="text" onChange={this.handleItemChange}/>
+                            <input type="text" onChange={(e)=>this.handleItemChange(e)}/>
                         </label>
+                        {this.props.data.itemDuplicated &&
+                        <div className="warning">
+                            this item already exists in the Inventory
+                        </div>
+                        }
                         <label>
                             <div>Quantity:</div>
-                            <input type="number" onChange={this.handleQuantityChange}/>
+                            <input type="number" onChange={this.handleQuantityChange.bind(this)}/>
                         </label>
                         <label>
                             <div>Price$:</div>
@@ -233,24 +235,19 @@ class AddInventory extends React.Component {
                                 <div className="error">max cents allowed 2 digits</div>
                             }
                             <span>
-                            <input type="number" placeholder="$" className="price" onChange={this.handleDollarsChange}/>
+                            <input type="number" placeholder="$" className="price" onChange={this.handleDollarsChange.bind(this)}/>
                             <span>.</span>
-                            <input type="number" placeholder="cents" className="price" onChange={this.handleCentsChange}/>
+                            <input type="number" placeholder="cents" className="price" onChange={this.handleCentsChange.bind(this)}/>
                             </span>
                         </label>
                         {this.state.isRequired &&
                             <div className="error">All fields are required</div>
                         }
-                        <button className="button" type="submit">Add To Preview</button>
+                        <button className="button" disabled={this.props.data.itemDuplicated === true} type="submit">Add To Preview</button>
                     </form>
                     {this.state.addBlocked &&
                     <div className="warning">
                         this item is already added to the preview table
-                    </div>
-                    }
-                    {this.props.data.itemDuplicated &&
-                    <div className="warning">
-                        this item is already exists in inventory
                     </div>
                     }
                     <h3 className="header">

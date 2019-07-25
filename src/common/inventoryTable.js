@@ -136,17 +136,10 @@ constructor(props) {
                                 }
                             </span>
                         </td>
-                        {this.getSaveButton(object)}
-                    </tr>
-                )
-            }
-            if (this.props.props.data.deleteEnabled) {
-                return (
-                    <tr className="td">
-                        <td className="td">{object.item}</td>
                         <td className="td">
                             <button className="delete-button" onClick={()=>this.deleteInventory(object._id.$oid)}>delete</button>
                         </td>
+                        {this.getSaveButton(object)}
                     </tr>
                 )
             }
@@ -155,11 +148,11 @@ constructor(props) {
                     <td className="td">{object.item}</td>
                     <td className="td">{object.quantity}</td>
                     <td className="td">{object.price}</td>
-                    <td className="td">
                     { this.props.canDelete &&
-                        <button className="delete-button" onClick={()=>this.props.props.removeFromPreview(object)}>remove</button>
-                    }
+                    <td className="td">
+                    <button className="delete-button" onClick={()=>this.props.props.removeFromPreview(object)}>remove</button>
                     </td>
+                    }
 
                 </tr>
             );
@@ -167,13 +160,6 @@ constructor(props) {
     }
 
     render() {
-    if(this.props.props.data.deleteEnabled) {
-        return (
-            <tbody>
-            {this.getList()}
-            </tbody>
-        )
-    }
         return (
             <table className="table">
                 <tbody>
