@@ -8,22 +8,6 @@
   width: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
 .table {
   border-collapse: collapse;
   border: 1px solid #9E9E9E;
@@ -65,6 +49,13 @@ body {
   height: 50px;
   background: #607D8B;
 }
+.nav-header {
+  position: absolute;
+  left: 45%;
+  text-align: center;
+  color: #FFC107;
+  margin: 8px;
+}
 .nav-section {
   margin-left: 95%;
 }
@@ -73,8 +64,9 @@ body {
 }
 .nav-button {
   margin-top: 12px;
-  border-radius: 7px;
+  border-radius: 10px;
   background: #FF9800;
+  cursor: pointer;
 }
 .inventory {
   margin-top: 50px;
@@ -160,6 +152,7 @@ body {
   background: #c37042;
   margin: 2px;
   cursor: pointer;
+  border-radius: 12px;
 }
 
 button:hover {
@@ -195,9 +188,4 @@ button:hover {
 
 .price {
   width: 30%;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }

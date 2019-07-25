@@ -106,7 +106,9 @@ class App extends React.Component {
         return (
             <div>
                 <nav className="nav-bar">
-
+                   <h2 className="nav-header">
+                       My Store Room
+                   </h2>
                     <span className={getClassName.call(this)}>
                         {getAddUserButton.call(this)}
                         {getLogoutButton.call(this)}
