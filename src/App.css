@@ -144,6 +144,7 @@ body {
   background: #8BC34A;
   margin: 2px;
   cursor: pointer;
+  border-radius: 8px;
 }
 .side-button {
   width: 100%;

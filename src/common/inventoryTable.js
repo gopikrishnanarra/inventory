@@ -60,7 +60,6 @@ constructor(props) {
     }
 
     getPrice({ price }) {
-    console.log('this.state.dollars', this.state.dollars);
         const dollars = this.state.dollars !== 0  ? this.state.dollars : price.split('.')[0];
         const cents = this.state.cents !== 0  ? this.state.cents : price.split('.')[1];
         return dollars + '.' + cents;

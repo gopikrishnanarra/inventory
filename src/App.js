@@ -38,6 +38,14 @@ function getLoginButton() {
     }
 }
 
+function getLogoutButton() {
+    if(this.props.data.loggedIn === true) {
+        return (
+            <button className="nav-button" onClick={this.props.logout}>logout</button>
+        );
+    }
+}
+
 function getClassName() {
     if (this.props.data.user.admin === true) {
         return "nav-admin-section";
@@ -95,30 +103,27 @@ class App extends React.Component {
     }
 
     render() {
-        if (!this.props.data.loggedIn && !this.props.data.forgot) {
-            return (
-                <Login {...this.props}/>
-            )
-        }
-        if (this.props.data.forgot) {
-            return (
-                <ResetPassword {...this.props}/>
-            )
-        }
-        if (this.props.data.addUser) {
-            return (
-                <AddUser {...this.props}/>
-            )
-        }
         return (
             <div>
                 <nav className="nav-bar">
 
                     <span className={getClassName.call(this)}>
                         {getAddUserButton.call(this)}
-                        <button className="nav-button" onClick={this.props.logout}>logout</button>
+                        {getLogoutButton.call(this)}
                     </span>
                 </nav>
+                <div className="inventory">
+                {(!this.props.data.loggedIn && !this.props.data.forgot) &&
+                    <Login {...this.props}/>
+                }
+                {this.props.data.forgot &&
+                    <ResetPassword {...this.props}/>
+                }
+                {this.props.data.addUser &&
+                    <AddUser {...this.props}/>
+                }
+                </div>
+                {this.props.data.sidePanelOpen &&
                 <div className="split left">
                     <div className="side-panel">
                         <section>
@@ -127,7 +132,8 @@ class App extends React.Component {
                                 </button>
                             </div>
                             <div>
-                                <button className="side-button" onClick={this.props.openAddInventory}>ADD INVENTORY</button>
+                                <button className="side-button" onClick={this.props.openAddInventory}>ADD INVENTORY
+                                </button>
                             </div>
                             <div>
                                 <button className="side-button" onClick={this.props.openEditInventory}>EDIT INVENTORY
@@ -137,7 +143,8 @@ class App extends React.Component {
                     </div>
 
                 </div>
-                {!this.props.data.addEnabled &&
+                }
+                {!this.props.data.addEnabled && (this.props.data.inventoryEnabled || this.props.data.editEnabled) &&
                 <div className="split right">
                     <div className="centered">
                         <input className="search" placeholder="search for Item" onChange={this.handleFilter}/>
@@ -158,13 +165,13 @@ class App extends React.Component {
                     </div>
                 </div>
                 }
-
                 {this.props.data.addEnabled &&
                 <div className="split right">
                     <div className="centered">
                         <AddInventory {...this.props}/>
                     </div>
-                </div>}
+                </div>
+                }
             </div>
         );
     }

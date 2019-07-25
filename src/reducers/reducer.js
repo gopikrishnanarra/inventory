@@ -15,7 +15,8 @@ const defaultState = {
     itemDuplicated: false,
     user: {},
     deleted: false,
-    edited: false
+    edited: false,
+    sidePanelOpen: false
 };
 
 const reducers = (state = defaultState, action) => {
@@ -23,15 +24,16 @@ const reducers = (state = defaultState, action) => {
         return {
             ...state,
             loggedIn: true,
+            sidePanelOpen: true,
             getLoginPage: false,
-            user: action.user
+            user: action.user,
+            getNewInventory: true,
+            inventoryEnabled: true
         };
     } else if (action.type === 'LOGOUT') {
         return {
-            ...state,
-            loggedIn: false,
-            getLoginPage: false,
-            canGetUsers: true
+            ...defaultState,
+            canGetUsers: true,
         };
     } else if (action.type === 'GET_LOGIN') {
         return {
@@ -40,10 +42,28 @@ const reducers = (state = defaultState, action) => {
             canGetUsers: true
         };
     }  else if (action.type === 'ADD_USER') {
-        return {
-            ...state,
-            addUser: action.value
-        };
+        if(action.value) {
+            return {
+                ...state,
+                addUser: action.value,
+                canGetUsers: true,
+                loggedIn: true,
+                sidePanelOpen: false,
+                getLoginPage: false,
+                inventoryEnabled: false,
+                editEnabled: false
+            };
+        } else {
+            return {
+                ...state,
+                loggedIn: true,
+                sidePanelOpen: true,
+                getLoginPage: false,
+                addUser: action.value,
+                getNewInventory: true,
+                inventoryEnabled: true
+            }
+        }
     }  else if (action.type === 'DUPLICATED_ITEM') {
         return {
             ...state,

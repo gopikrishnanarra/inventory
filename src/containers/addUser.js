@@ -20,6 +20,19 @@ export default class AddUser extends React.Component {
 
     setUser(event) {
         if(event.target.value.length) {
+            const found = this.props.data.users.find((user)=>{
+                return user.userId === event.target.value
+            });
+            if(found) {
+                this.setState({
+                    userExists: true
+                })
+            }
+            if(!found) {
+                this.setState({
+                    userExists: false
+                })
+            }
             this.setState({
                 user: event.target.value
             });
@@ -67,7 +80,6 @@ export default class AddUser extends React.Component {
     async addUser() {
         const found = this.props.data.users.find((user)=>{
             return user.userId === this.state.user
-
             });
         if(found) {
             this.setState({
@@ -78,8 +90,8 @@ export default class AddUser extends React.Component {
             this.setState({
                 userExists: false
             })
+            await this.addNewUser();
         }
-        await this.addNewUser();
     }
     render() {
         return (
@@ -95,7 +107,7 @@ export default class AddUser extends React.Component {
                         <input placeholder="password" className="input" onChange={this.setPassword}/>
                         <h3 className="info">Admin access</h3>
                         <input placeholder="true/false" className="input" onChange={this.setAdmin}/>
-                        <button className="button" onClick={this.addUser}>Add User</button>
+                        <button className="button" disabled={this.state.userExists === true} onClick={this.addUser}>Add User</button>
                         <button className="button" onClick={this.cancel}>Cancel</button>
 
                     </div>
