@@ -148,6 +148,12 @@ class App extends React.Component {
                 }
                 {!this.props.data.addEnabled && (this.props.data.inventoryEnabled || this.props.data.editEnabled) &&
                 <div className="split right">
+                    {this.props.data.editEnabled &&
+                    <div className="headers">EDIT INVENTORY</div>
+                    }
+                    {this.props.data.inventoryEnabled &&
+                    <div className="headers">INVENTORY LIST</div>
+                    }
                     <div className="centered">
                         <input className="search" placeholder="search for Item" onChange={this.handleFilter}/>
                         <InventoryTable
@@ -169,6 +175,7 @@ class App extends React.Component {
                 }
                 {this.props.data.addEnabled &&
                 <div className="split right">
+                    <div className="headers">ADD INVENTORY</div>
                     <div className="centered">
                         <AddInventory {...this.props}/>
                     </div>

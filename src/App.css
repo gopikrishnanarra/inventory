@@ -51,7 +51,7 @@ body {
 }
 .nav-header {
   position: absolute;
-  left: 45%;
+  left: 5%;
   text-align: center;
   color: #FFC107;
   margin: 8px;
@@ -107,6 +107,12 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.headers {
+  text-align: center;
+  color: #10f91a;
+  font-size: x-large;
 }
 
 .side-panel {
