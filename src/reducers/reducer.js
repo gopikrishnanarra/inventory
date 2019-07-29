@@ -16,7 +16,8 @@ const defaultState = {
     user: {},
     deleted: false,
     edited: false,
-    sidePanelOpen: false
+    sidePanelOpen: false,
+    welcome: true
 };
 
 const reducers = (state = defaultState, action) => {
@@ -24,6 +25,7 @@ const reducers = (state = defaultState, action) => {
         return {
             ...state,
             loggedIn: true,
+            welcome: false,
             sidePanelOpen: true,
             getLoginPage: false,
             user: action.user,

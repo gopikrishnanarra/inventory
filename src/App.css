@@ -8,6 +8,13 @@
   width: 100%;
 }
 
+.welcome {
+  color: greenyellow;
+  font-weight: bolder;
+  font-size: x-large;
+  font-style: italic;
+}
+
 .table {
   border-collapse: collapse;
   border: 1px solid #9E9E9E;
@@ -179,6 +186,9 @@ body {
 
 button:hover {
   background: #c5c58a
+}
+button:disabled {
+  cursor: not-allowed;
 }
 
 .delete-button:hover {
