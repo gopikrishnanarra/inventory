@@ -102,6 +102,10 @@ class App extends React.Component {
         }
     }
 
+    getButtonClassName(isActive) {
+        return isActive ? "side-button-active" : "side-button";
+    }
+
     render() {
         return (
             <div>
@@ -130,15 +134,15 @@ class App extends React.Component {
                     <div className="side-panel">
                         <section>
                             <div>
-                                <button className="side-button" onClick={this.props.openInventory}>INVENTORY
+                                <button className={this.getButtonClassName(this.props.data.inventoryEnabled)} onClick={this.props.openInventory}>INVENTORY
                                 </button>
                             </div>
                             <div>
-                                <button className="side-button" onClick={this.props.openAddInventory}>ADD INVENTORY
+                                <button className={this.getButtonClassName(this.props.data.addEnabled)} onClick={this.props.openAddInventory}>ADD INVENTORY
                                 </button>
                             </div>
                             <div>
-                                <button className="side-button" onClick={this.props.openEditInventory}>EDIT INVENTORY
+                                <button className={this.getButtonClassName(this.props.data.editEnabled)} onClick={this.props.openEditInventory}>EDIT INVENTORY
                                 </button>
                             </div>
                         </section>

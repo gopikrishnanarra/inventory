@@ -118,10 +118,11 @@ body {
 .side-panel {
   position: absolute;
   top: 100px;
-  margin-left: 50%;
-  margin-right: 5px;
-  transform: translate(-50%, -50%);
+  /*margin-left: 50%;*/
+  /*margin-right: 5px;*/
+  /*transform: translate(-50%, -50%);*/
   text-align: center;
+  width: 100%;
 }
 
 .centered img {
@@ -146,12 +147,27 @@ body {
 }
 .side-button {
   width: 100%;
-  border-color: #f7fafb;
-  background: #c5c58a;
+  /*border-color: #f7fafb;*/
+  background: #607D8B;
   cursor: pointer;
   margin: 2px;
   border-radius: 12px;
   font-style: italic;
+  font-weight: bold;
+  border-width: 1px;
+}
+
+.side-button-active {
+  width: 100%;
+  background: rgba(25, 17, 8, 0.83);
+  cursor: pointer;
+  margin: 2px;
+  border-radius: 12px;
+  font-style: italic;
+  color: green;
+  /*border-color: green;*/
+  font-weight: bold;
+  border-width: 1px;
 }
 .delete-button {
   border-color: #f7fafb;
@@ -169,7 +185,10 @@ button:hover {
   background: #c5c58a
 }
 .side-button:hover {
-  background: #607D8B
+  background: #c5c58a
+}
+.side-button-active:hover {
+  background: #c5c58a
 }
 .header {
   color: #00BCD4;

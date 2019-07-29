@@ -114,7 +114,8 @@ const reducers = (state = defaultState, action) => {
         return {
             ...state,
             addEnabled: true,
-            inventoryEnabled: false
+            inventoryEnabled: false,
+            editEnabled: false
         };
     } else if (action.type === 'CLOSE_ADD_INVENTORY') {
         return {
