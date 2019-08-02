@@ -4,6 +4,7 @@ import AddInventory from './addInventory'
 import InventoryTable from './common/inventoryTable'
 import Login from '../src/containers/login'
 import ResetPassword from '../src/containers/resetPassword'
+import Welcome from '../src/containers/welcome'
 import AddUser from '../src/containers/addUser'
 import './App.css'
 
@@ -26,14 +27,6 @@ function getAddUserButton() {
     if (this.props.data.user.admin === true) {
         return (
             <button className="nav-button" onClick={() => this.props.addNewUser(true)}>Add User</button>
-        )
-    }
-}
-
-function getLoginButton() {
-    if (this.props.data.loggedIn === false) {
-        return (
-            <button className="nav-button" onClick={this.props.getLogin}>login</button>
         )
     }
 }
@@ -107,6 +100,7 @@ class App extends React.Component {
     }
 
     render() {
+        console.log('data', this.props.data);
         return (
             <div>
                 <nav className="nav-bar">
@@ -119,15 +113,18 @@ class App extends React.Component {
                     </span>
                 </nav>
                 <div className="inventory">
-                {(!this.props.data.loggedIn && !this.props.data.forgot) &&
-                    <Login {...this.props}/>
-                }
-                {this.props.data.forgot &&
-                    <ResetPassword {...this.props}/>
-                }
-                {this.props.data.addUser &&
-                    <AddUser {...this.props}/>
-                }
+                    {this.props.data.welcome &&
+                         <Welcome {...this.props}/>
+                    }
+                    {(!this.props.data.loggedIn && !this.props.data.forgot && this.props.data.getLoginPage) &&
+                        <Login {...this.props}/>
+                    }
+                    {this.props.data.forgot &&
+                        <ResetPassword {...this.props}/>
+                    }
+                    {this.props.data.addUser &&
+                        <AddUser {...this.props}/>
+                    }
                 </div>
                 {this.props.data.sidePanelOpen &&
                 <div className="split left">

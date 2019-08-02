@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
     resetInventoryIds: () => dispatch(actions.resetInventoryIds()),
     login: (user) => dispatch(actions.login(user)),
     logout: () => dispatch(actions.logout()),
-    getLogin: () => dispatch(actions.getLogin()),
+    welcomePage: (value) => dispatch(actions.welcomePage(value)),
     forgot: (value) => dispatch(actions.forgot(value)),
     addNewUser: (value) => dispatch(actions.addUser(value)),
     duplicatedItem: (value) => dispatch(actions.duplicatedItem(value)),

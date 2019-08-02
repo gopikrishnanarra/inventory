@@ -17,6 +17,7 @@ const defaultState = {
     deleted: false,
     edited: false,
     sidePanelOpen: false,
+    getLoginPage: false,
     welcome: true
 };
 
@@ -40,7 +41,8 @@ const reducers = (state = defaultState, action) => {
     } else if (action.type === 'GET_LOGIN') {
         return {
             ...state,
-            getLoginPage: true,
+            getLoginPage: !action.value,
+            welcome: action.value,
             canGetUsers: true
         };
     }  else if (action.type === 'ADD_USER') {

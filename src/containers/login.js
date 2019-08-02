@@ -97,7 +97,10 @@ export default class Login extends Component {
                                 Login
                             </Button>
                             <Button className="button" onClick={()=>this.props.forgot(true)}>
-                                forgot id/password
+                                reset
+                            </Button>
+                            <Button className="button" onClick={()=>this.props.welcomePage(true)}>
+                                cancel
                             </Button>
                         </Form>
                     </div>

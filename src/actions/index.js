@@ -5,8 +5,9 @@ export const login = (user) => ({
 export const logout = () => ({
     type: 'LOGOUT'
 });
-export const getLogin = () => ({
-    type: 'GET_LOGIN'
+export const welcomePage = (value) => ({
+    type: 'GET_LOGIN',
+    value: value
 });
 export const addUser = (value) => ({
     type: 'ADD_USER',
