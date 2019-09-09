@@ -219,6 +219,7 @@ button:disabled {
 .info {
   color: #00BCD4;
   font-size: small;
+  margin-bottom: 0;
 }
 
 .price {

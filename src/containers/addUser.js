@@ -94,6 +94,10 @@ export default class AddUser extends React.Component {
         }
     }
     render() {
+        function addUserDisabled() {
+            return this.state.userExists === true || !this.state.user.length || !this.state.password.length;
+        }
+
         return (
             <div>
                 <section className="centered">
@@ -107,7 +111,7 @@ export default class AddUser extends React.Component {
                         <input placeholder="password" className="input" onChange={this.setPassword}/>
                         <h3 className="info">Admin access</h3>
                         <input placeholder="true/false" className="input" onChange={this.setAdmin}/>
-                        <button className="button" disabled={this.state.userExists === true} onClick={this.addUser}>Add User</button>
+                        <button className="button" disabled={addUserDisabled.call(this)} onClick={this.addUser}>Add User</button>
                         <button className="button" onClick={this.cancel}>Cancel</button>
 
                     </div>
