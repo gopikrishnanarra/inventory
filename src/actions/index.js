@@ -29,6 +29,10 @@ export const getInventory = (inventory) => ({
     type: 'GET_INVENTORY',
     inventory: inventory
 });
+export const filteredInventory = (inventory) => ({
+    type: 'FILTERED_INVENTORY',
+    inventory: inventory
+});
 export const previewList = (list) => ({
     type: 'PREVIEW_LIST',
     list: list

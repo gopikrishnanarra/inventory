@@ -1,5 +1,6 @@
 const defaultState = {
     inventory: [],
+    filteredInventory: [],
     previewList: [],
     editedInventory: [],
     addEnabled: false,
@@ -86,6 +87,11 @@ const reducers = (state = defaultState, action) => {
             edited: false,
             deleted: false
         };
+    } else if (action.type === 'FILTERED_INVENTORY') {
+        return {
+            ...state,
+            filteredInventory: action.inventory,
+        };
     } else if (action.type === 'PREVIEW_LIST') {
         return {
             ...state,
@@ -159,7 +165,8 @@ const reducers = (state = defaultState, action) => {
             ...state,
             editEnabled: false,
             addEnabled: false,
-            inventoryEnabled: true
+            inventoryEnabled: true,
+            filteredInventory: state.inventory
         };
     } else if (action.type === 'CLOSE_EDIT_INVENTORY') {
         return {

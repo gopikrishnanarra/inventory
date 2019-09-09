@@ -11,6 +11,7 @@ function mapStateToProps(state) {
     }}
 const mapDispatchToProps = dispatch => ({
     getInventory: (inventory) => dispatch(actions.getInventory(inventory)),
+    filteredList: (inventory) => dispatch(actions.filteredInventory(inventory)),
     previewAddList: (list) => dispatch(actions.previewList(list)),
     removeFromPreview: (object) => dispatch(actions.editPreview(object)),
     resetPreview: () => dispatch(actions.resetPreviewList()),

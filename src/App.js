@@ -60,7 +60,6 @@ class App extends React.Component {
         super(props);
         this.state = {
             filtered: false,
-            filteredInventory:[]
         };
         this.handleFilter = this.handleFilter.bind(this);
     }
@@ -87,11 +86,13 @@ class App extends React.Component {
                 filtered: true,
                 filteredInventory: newList
             });
+            this.props.filteredList(newList);
         }
         if(!event.target.value.length) {
             this.setState({
                 filtered: false
             });
+            this.props.filteredList(this.props.data.inventory);
         }
     }
 
@@ -100,7 +101,7 @@ class App extends React.Component {
     }
 
     render() {
-        console.log('data', this.props.data);
+        console.log('filteredInventory', this.props.data.filteredInventory);
         return (
             <div>
                 <nav className="nav-bar">
@@ -162,7 +163,7 @@ class App extends React.Component {
                             list={this.props.data.inventory}
                             save={this.saveEditInventory}
                             deleteInventoryId={this.props.deleteInventoryId}
-                            filteredInventory={this.state.filteredInventory}
+                            filteredInventory={this.props.data.filteredInventory}
                             filtered={this.state.filtered}
                             canDelete={false}
                         />
