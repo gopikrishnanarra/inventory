@@ -117,8 +117,12 @@ body {
 }
 
 .headers {
+  margin-right: 40%;
+  margin-left: 40%;
+  border-radius: 10px;
+  background: #607D8B;
   text-align: center;
-  color: #10f91a;
+  color: #FFC107;
   font-size: x-large;
 }
 
