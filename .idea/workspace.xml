@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ced3e92e-0eeb-458b-b1c2-525b2c129fc0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
-    <list id="52c6feb3-5871-45c5-9c58-714025703caa" name="vcs" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ced3e92e-0eeb-458b-b1c2-525b2c129fc0" name="Default Changelist" comment="" />
+    <list id="52c6feb3-5871-45c5-9c58-714025703caa" name="vcs" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,18 +16,6 @@
     <node-interpreter value="project" />
     <bower-package value="" />
     <bower.json value="" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/.idea/workspace.xml">
-      <ranges>
-        <range start1="3" end1="7" start2="3" end2="14" changelist="52c6feb3-5871-45c5-9c58-714025703caa" />
-        <range start1="13" end1="69" start2="20" end2="22" changelist="52c6feb3-5871-45c5-9c58-714025703caa" />
-        <range start1="83" end1="112" start2="36" end2="36" changelist="52c6feb3-5871-45c5-9c58-714025703caa" />
-        <range start1="114" end1="114" start2="38" end2="40" changelist="ced3e92e-0eeb-458b-b1c2-525b2c129fc0" />
-        <range start1="174" end1="202" start2="100" end2="100" changelist="52c6feb3-5871-45c5-9c58-714025703caa" />
-        <range start1="205" end1="236" start2="103" end2="113" changelist="52c6feb3-5871-45c5-9c58-714025703caa" />
-      </ranges>
-    </file>
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="hoCqMOFT" />
@@ -63,6 +45,9 @@
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript.Templates" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gn59762\Desktop\myproject\inventory" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\gn59762\Desktop\inventory\inventory\sass" />
     </key>
@@ -105,6 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1562084594327</updated>
       <workItem from="1562084595719" duration="6869000" />
+      <workItem from="1569425781329" duration="775000" />
     </task>
     <task id="LOCAL-00001" summary="set filtered inventory in state">
       <created>1568063868377</created>
@@ -113,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568063868377</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add app.yaml file">
+      <created>1569425822589</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1569425822589</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,7 +117,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -132,6 +127,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="set filtered inventory in state" />
-    <option name="LAST_COMMIT_MESSAGE" value="set filtered inventory in state" />
+    <MESSAGE value="add app.yaml file" />
+    <option name="LAST_COMMIT_MESSAGE" value="add app.yaml file" />
   </component>
 </project>
