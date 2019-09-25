@@ -34,7 +34,7 @@ function getAddUserButton() {
 function getLogoutButton() {
     if(this.props.data.loggedIn === true) {
         return (
-            <button className="nav-button" onClick={this.props.logout}>logout</button>
+            <button className="nav-button" onClick={this.props.logout}>Logout</button>
         );
     }
 }
