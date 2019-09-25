@@ -101,7 +101,6 @@ class App extends React.Component {
     }
 
     render() {
-        console.log('filteredInventory', this.props.data.filteredInventory);
         return (
             <div>
                 <nav className="nav-bar">
