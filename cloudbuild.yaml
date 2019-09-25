@@ -1,3 +1,3 @@
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['beta', 'run', 'deploy', 'default', '--image', 'gcr.io/inventory-246516/default', '--region', 'us-east1','--platform', 'managed', '--quiet']
+    args: ['beta', 'run', 'deploy', 'default', '--image', 'us.gcr.io/inventory-246516/appengine/default.20190925t105022@sha256:4cdf534792f2712e176e510566f1160d8f949fc22f98e4f12164329a945a61f6', '--region', 'us-east1','--platform', 'managed', '--quiet']
