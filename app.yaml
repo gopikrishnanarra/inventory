@@ -1,3 +1,3 @@
 runtime: python27
-env: flex
+api_version: 1
 threadsafe: yes
