@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ced3e92e-0eeb-458b-b1c2-525b2c129fc0" name="Default Changelist" comment="" />
+    <list default="true" id="ced3e92e-0eeb-458b-b1c2-525b2c129fc0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+    </list>
     <list id="52c6feb3-5871-45c5-9c58-714025703caa" name="vcs" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,11 +22,6 @@
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="hoCqMOFT" />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
   </component>
   <component name="ProjectId" id="1Qf3LzVGmFTcJtmI0YMGnGUiF4G" />
   <component name="PropertiesComponent">
@@ -90,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1562084594327</updated>
       <workItem from="1562084595719" duration="6869000" />
-      <workItem from="1569425781329" duration="775000" />
+      <workItem from="1569425781329" duration="4703000" />
     </task>
     <task id="LOCAL-00001" summary="set filtered inventory in state">
       <created>1568063868377</created>
@@ -106,7 +104,35 @@
       <option name="project" value="LOCAL" />
       <updated>1569425822589</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="remove package.lock">
+      <created>1569428027680</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1569428027680</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add cloudbuild.yaml file">
+      <created>1569436055855</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1569436055855</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add projectId in cloudbuild.yaml file">
+      <created>1569436283019</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1569436283019</updated>
+    </task>
+    <task id="LOCAL-00006" summary="refactor cloudbuild.yaml file">
+      <created>1569437334496</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1569437334496</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,6 +154,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="set filtered inventory in state" />
     <MESSAGE value="add app.yaml file" />
-    <option name="LAST_COMMIT_MESSAGE" value="add app.yaml file" />
+    <MESSAGE value="remove package.lock" />
+    <MESSAGE value="add cloudbuild.yaml file" />
+    <MESSAGE value="add projectId in cloudbuild.yaml file" />
+    <MESSAGE value="refactor cloudbuild.yaml file" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor cloudbuild.yaml file" />
   </component>
 </project>
