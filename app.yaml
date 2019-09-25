@@ -1,6 +1,4 @@
 runtime: nodejs
-threadsafe: yes
-
 handlers:
   - url: .*
     script: main.app
