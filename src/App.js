@@ -131,7 +131,7 @@ class App extends React.Component {
                     <div className="side-panel">
                         <section>
                             <div>
-                                <button className={this.getButtonClassName(this.props.data.inventoryEnabled)} onClick={this.props.openInventory}>INVENTORY
+                                <button className={this.getButtonClassName(this.props.data.inventoryEnabled)} onClick={this.props.openInventory}>INVENTORY LIST
                                 </button>
                             </div>
                             <div>
