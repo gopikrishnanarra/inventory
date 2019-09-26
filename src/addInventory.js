@@ -154,6 +154,7 @@ class AddInventory extends React.Component {
             if (!itemExists && this.state.item.length) {
                 this.props.previewAddList([
                     {
+                        userId: this.props.data.user.userId,
                         item: this.state.item,
                         quantity: this.state.quantity,
                         price: this.state.dollars + '.' + this.state.cents
