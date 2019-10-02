@@ -23,28 +23,12 @@ function fetchUsers() {
         });
 }
 
-function getAddUserButton() {
-    if (this.props.data.user.admin === true) {
-        return (
-            <button className="nav-button" onClick={() => this.props.addNewUser(true)}>Add User</button>
-        )
-    }
-}
-
 function getLogoutButton() {
     if(this.props.data.loggedIn === true) {
         return (
             <button className="nav-button" onClick={this.props.logout}>Logout</button>
         );
     }
-}
-
-function getClassName() {
-    if (this.props.data.user.admin === true) {
-        return "nav-admin-section";
-    }
-    return "nav-section";
-
 }
 
 function fetchEditedInventory() {
@@ -107,8 +91,7 @@ class App extends React.Component {
                    <h2 className="nav-header">
                        My Store Room
                    </h2>
-                    <span className={getClassName.call(this)}>
-                        {getAddUserButton.call(this)}
+                    <span className="nav-section">
                         {getLogoutButton.call(this)}
                     </span>
                 </nav>

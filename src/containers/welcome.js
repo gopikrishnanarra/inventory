@@ -1,10 +1,5 @@
 /* eslint-disable */
 import React, { Component } from "react";
-import Login from './login'
-import App from '../../src/App'
-import ResetPassword from "./resetPassword";
-import AddUser from "./addUser";
-
 
 export default class Welcome extends Component {
     constructor(props) {
@@ -30,10 +25,13 @@ export default class Welcome extends Component {
                         <div className="header">
                             please login to your account
                         </div>
+                <span>
                 <button className="button" onClick={()=>this.props.welcomePage(false)}>
                     login
                 </button>
-                    </section>
+                <button className="button" onClick={() => this.props.addNewUser(true)}>Create</button>
+                </span>
+            </section>
         );
     }
 }

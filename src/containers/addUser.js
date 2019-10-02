@@ -7,14 +7,12 @@ export default class AddUser extends React.Component {
         super(props);
         this.state = {
             user: "",
-            admin: "",
             password: "",
             userExists: false
         };
         this.setUser = this.setUser.bind(this);
         this.setPassword = this.setPassword.bind(this);
         this.addUser = this.addUser.bind(this);
-        this.setAdmin = this.setAdmin.bind(this);
         this.cancel = this.cancel.bind(this);
     }
 
@@ -38,20 +36,12 @@ export default class AddUser extends React.Component {
             });
         }
     }
-    setAdmin(event) {
-        if(event.target.value.length) {
-            this.setState({
-                admin: event.target.value
-            });
-        }
-    }
 
     cancel() {
         this.setState({
             user: "",
             userExists: false,
             password: "",
-            admin: "",
         });
         this.props.addNewUser(false);
     }
@@ -67,8 +57,7 @@ export default class AddUser extends React.Component {
             try {
                 await axios.post(addUserUrl, {
                     userId: this.state.user,
-                    password: this.state.password,
-                    admin: this.state.admin
+                    password: this.state.password
                 });
                 this.props.addNewUser(false)
             } catch (e) {
@@ -109,8 +98,6 @@ export default class AddUser extends React.Component {
                         <input placeholder="userId" className="input" onChange={this.setUser}/>
                         <h3 className="info">Please enter password</h3>
                         <input placeholder="password" className="input" onChange={this.setPassword}/>
-                        <h3 className="info">Admin access</h3>
-                        <input placeholder="true/false" className="input" onChange={this.setAdmin}/>
                         <button className="button" disabled={addUserDisabled.call(this)} onClick={this.addUser}>Add User</button>
                         <button className="button" onClick={this.cancel}>Cancel</button>
 

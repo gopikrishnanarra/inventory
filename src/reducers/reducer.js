@@ -52,21 +52,23 @@ const reducers = (state = defaultState, action) => {
                 ...state,
                 addUser: action.value,
                 canGetUsers: true,
-                loggedIn: true,
+                loggedIn: false,
                 sidePanelOpen: false,
                 getLoginPage: false,
                 inventoryEnabled: false,
-                editEnabled: false
+                editEnabled: false,
+                welcome: false
             };
         } else {
             return {
                 ...state,
-                loggedIn: true,
-                sidePanelOpen: true,
+                loggedIn: false,
+                sidePanelOpen: false,
                 getLoginPage: false,
                 addUser: action.value,
-                getNewInventory: true,
-                inventoryEnabled: true
+                getNewInventory: false,
+                inventoryEnabled: false,
+                welcome: true
             }
         }
     }  else if (action.type === 'DUPLICATED_ITEM') {

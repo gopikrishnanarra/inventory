@@ -78,7 +78,7 @@ export default class ResetPassword extends React.Component {
     async resetPassword() {
         const updateUserUrl = `https://api.mlab.com/api/1/databases/users/collections/users-list/${this.state.id}?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`
         if(this.state.reset && this.state.id.length > 0) {
-            await axios.put(updateUserUrl,{userId: this.state.user, password: this.state.password, admin: false});
+            await axios.put(updateUserUrl,{userId: this.state.user, password: this.state.password});
             this.setState({
                 userExists: false,
                 reset: false,
