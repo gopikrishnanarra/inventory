@@ -30,28 +30,18 @@ export default class Login extends Component {
         });
     };
 
-    handleSubmit = event => {
-        const userExists = this.props.data.users.find((user) => {
-            return user.userId === this.state.email
-        });
-        if (userExists) {
-            this.props.data.users.forEach((user) => {
-                if(user.userId === this.state.email) {
-                    if(user.password === this.state.password) {
+    handleSubmit = async event => {
+        fetch(`https://apiserverdata.com/userDetails?id=${this.state.email}&password=${this.state.password}`)
+            .then(res => res.json())
+            .then(user => {
+                    if(user.login) {
                         this.props.login(user);
-                    }else {
-                        this.setState({
-                            passwordMissMatch: true
-                        })
                     }
-                }
+                    this.setState({
+                        passwordMissMatch: user.passwordMissMatch,
+                        userExists: user.userExists
+                    });
             });
-        }
-        if (!userExists) {
-            this.setState({
-                userExists: false
-            })
-        }
         event.preventDefault();
     };
 
