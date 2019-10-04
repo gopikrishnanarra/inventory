@@ -8,7 +8,8 @@ export default class AddUser extends React.Component {
         this.state = {
             user: "",
             password: "",
-            userExists: false
+            userExists: false,
+            userAdded: true
         };
         this.setUser = this.setUser.bind(this);
         this.setPassword = this.setPassword.bind(this);
@@ -18,21 +19,9 @@ export default class AddUser extends React.Component {
 
     setUser(event) {
         if(event.target.value.length) {
-            const found = this.props.data.users.find((user)=>{
-                return user.userId === event.target.value
-            });
-            if(found) {
-                this.setState({
-                    userExists: true
-                })
-            }
-            if(!found) {
-                this.setState({
-                    userExists: false
-                })
-            }
             this.setState({
-                user: event.target.value
+                user: event.target.value,
+                userExists: false
             });
         }
     }
@@ -51,35 +40,26 @@ export default class AddUser extends React.Component {
             password: event.target.value
         });
     }
-    async addNewUser() {
-        if(!this.state.userExists) {
-            const addUserUrl = `https://api.mlab.com/api/1/databases/users/collections/users-list?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`
-            try {
-                await axios.post(addUserUrl, {
-                    userId: this.state.user,
-                    password: this.state.password
-                });
-                this.props.addNewUser(false)
-            } catch (e) {
-                console.log(e.error.message)
-            }
-        }
-    }
 
     async addUser() {
-        const found = this.props.data.users.find((user)=>{
-            return user.userId === this.state.user
-            });
-        if(found) {
+        const addUserUrl = 'https://apiserverdata.com/user/create';
+        const response = await axios.post(addUserUrl, {
+            userId: this.state.user,
+            password: this.state.password
+        });
+        if(response.data.userExists) {
             this.setState({
-                userExists: true
+                userExists: true,
             })
-        }
-        if(!found) {
-            this.setState({
-                userExists: false
-            })
-            await this.addNewUser();
+        } else if(!response.data.userExists) {
+            if(response.data.userAdded) {
+                this.props.addNewUser(false)
+            }
+            if(!response.data.userAdded) {
+                this.setState({
+                    userAdded: false
+                })
+            }
         }
     }
     render() {
@@ -92,6 +72,9 @@ export default class AddUser extends React.Component {
                 <section className="centered">
                     <div className="centered">
                         <h3 className="info">Please enter userId</h3>
+                        {!this.state.userAdded &&
+                        <h3 className="error">Unable to add user</h3>
+                        }
                         {this.state.userExists &&
                         <h3 className="error">user name already taken</h3>
                         }

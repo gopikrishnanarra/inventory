@@ -9,7 +9,7 @@ import AddUser from '../src/containers/addUser'
 import './App.css'
 
 function fetchInventory() {
-    fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
+    fetch("https://apiserverdata.com/inventory")
         .then(res => res.json())
         .then(list => {
             this.props.getInventory(list.filter(item => item.userId === this.props.data.user.userId));
@@ -32,7 +32,7 @@ function getLogoutButton() {
 }
 
 function fetchEditedInventory() {
-    fetch("https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
+    fetch("https://apiserverdata.com/inventory")
         .then(res => res.json())
         .then(list => {
             this.props.getEditedInventory(list.filter(item => item.userId === this.props.data.user.userId));
