@@ -206,7 +206,7 @@ class AddInventory extends React.Component {
     }
 
     async save() {
-            const url = 'https://api.mlab.com/api/1/databases/inventory/collections/inventory?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ';
+            const url = 'https://apiserverdata.com/inventory/addItem';
             await axios.post(url, this.props.data.previewList);
             this.reset();
             this.props.fetchInventory();
