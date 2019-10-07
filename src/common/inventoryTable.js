@@ -78,7 +78,7 @@ constructor(props) {
     }
 
     async deleteInventory(id) {
-        const url = `https://api.mlab.com/api/1/databases/inventory/collections/inventory/${id}?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`;
+        const url = `https://apiserverdata.com/inventory/delete?id=${id}`;
         try {
             await axios.delete(url);
             this.props.props.deleteInventory();
