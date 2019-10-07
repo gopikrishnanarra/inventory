@@ -36,7 +36,7 @@ export default class ResetPassword extends React.Component {
                 this.setState({
                     userExists: true,
                     enterUser: false,
-                    id: user._id.$oid
+                    id: user.id
                 })
             }
             if(!(user.userId === this.state.user)) {

@@ -31,7 +31,7 @@ export default class Login extends Component {
     };
 
     handleSubmit = async event => {
-        fetch(`https://apiserverdata.com/userDetails?id=${this.state.email}&password=${this.state.password}`)
+        fetch(`https://apiserverdata.com/users/userDetails?id=${this.state.email}&password=${this.state.password}`)
             .then(res => res.json())
             .then(user => {
                     if(user.login) {

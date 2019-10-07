@@ -42,7 +42,7 @@ export default class AddUser extends React.Component {
     }
 
     async addUser() {
-        const addUserUrl = 'https://apiserverdata.com/user/create';
+        const addUserUrl = 'https://apiserverdata.com/users/create';
         const response = await axios.post(addUserUrl, {
             userId: this.state.user,
             password: this.state.password

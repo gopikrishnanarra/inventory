@@ -16,7 +16,7 @@ function fetchInventory() {
         });
 }
 function fetchUsers() {
-    fetch("https://api.mlab.com/api/1/databases/users/collections/users-list?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ")
+    fetch("https://apiserverdata.com/users/all")
         .then(res => res.json())
         .then(users => {
             this.props.getUsers(users);
