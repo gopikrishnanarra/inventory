@@ -17,15 +17,6 @@ export default class AddUser extends React.Component {
         this.cancel = this.cancel.bind(this);
     }
 
-    setUser(event) {
-        if(event.target.value.length) {
-            this.setState({
-                user: event.target.value,
-                userExists: false
-            });
-        }
-    }
-
     cancel() {
         this.setState({
             user: "",
@@ -40,28 +31,61 @@ export default class AddUser extends React.Component {
             password: event.target.value
         });
     }
-
-    async addUser() {
-        const addUserUrl = 'https://apiserverdata.com/users/create';
-        const response = await axios.post(addUserUrl, {
-            userId: this.state.user,
-            password: this.state.password
-        });
-        if(response.data.userExists) {
-            this.setState({
-                userExists: true,
-            })
-        } else if(!response.data.userExists) {
-            if(response.data.userAdded) {
-                this.props.addNewUser(false)
-            }
-            if(!response.data.userAdded) {
+    setUser(event) {
+        if(event.target.value.length) {
+            const found = this.props.data.users.find((user)=>{
+                return user.userId === event.target.value
+            });
+            if(found) {
                 this.setState({
-                    userAdded: false
+                    userExists: true
                 })
+            }
+            if(!found) {
+                this.setState({
+                    userExists: false
+                })
+            }
+            this.setState({
+                user: event.target.value
+            });
+        }
+    }
+    async addNewUser() {
+        if(!this.state.userExists) {
+            const addUserUrl = `http://localhost:9000/users/create`;
+            try {
+                const response = await axios.post(addUserUrl, {
+                    userId: this.state.user,
+                    password: this.state.password
+                });
+                this.setState({
+                    userAdded: response.data.userAdded
+                });
+                this.props.addNewUser(false)
+            } catch (e) {
+                console.log(e.error.message)
             }
         }
     }
+
+    async addUser() {
+        const found = this.props.data.users.find((user)=>{
+            return user.userId === this.state.user
+        });
+        if(found) {
+            this.setState({
+                userExists: true
+            })
+        }
+        if(!found) {
+            this.setState({
+                userExists: false
+            });
+            await this.addNewUser();
+        }
+    }
+
     render() {
         function addUserDisabled() {
             return this.state.userExists === true || !this.state.user.length || !this.state.password.length;
