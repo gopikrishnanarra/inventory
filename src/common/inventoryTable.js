@@ -67,7 +67,7 @@ constructor(props) {
 
     async saveEditInventory(id) {
         const list = this.props.props.data.editedInventory.filter(o => o._id.$oid === id);
-        const url = `https://api.mlab.com/api/1/databases/inventory/collections/inventory/${id}?apiKey=kIOuLscCmhbeSOoBEtJUYPV6vy1TMIaQ`;
+        const url = `https://apiserverdata.com/inventory/editItem?id=${id}`;
         try {
             await axios.put(url, list[0]);
             this.props.props.editInventory();
