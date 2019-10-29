@@ -1,4 +1,5 @@
 import React from 'react';
+
 import AddInventory from './addInventory'
 import InventoryTable from './common/inventoryTable'
 import Login from '../src/containers/login'
