@@ -4,7 +4,6 @@ import App from '../App'
 const getInventoryData = (data) => {
     return data;
 };
-
 function mapStateToProps(state) {
     return {
         data: getInventoryData(state.data)
