@@ -261,7 +261,7 @@ class AddInventory extends React.Component {
                     />
                     <button className="button" onClick={this.reset}>reset</button>
                     <div>
-                    <button className="button" onClick={this.saveInventory} disabled={!this.state.saveEnabled}>save</button>
+                    <button className="button" onClick={this.saveInventory} disabled={!this.state.saveEnabled}>Save</button>
                         <button className="button" onClick={this.props.closeAddInventory}>CLOSE</button>
                     </div>
                 </section>
