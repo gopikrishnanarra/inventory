@@ -5,7 +5,6 @@
   "homepage": "https://gopikrishnanarra.github.io/inventory/",
   "dependencies": {
     "axios": "^1.17.0",
-    "gh-pages": "^6.3.0",
     "prop-types": "latest",
     "react": "^16.14.0",
     "react-bootstrap": "^1.0.0-beta.9",
@@ -15,10 +14,9 @@
     "redux": "^4.0.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "BUILD_PATH=docs react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
