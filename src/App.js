@@ -9,14 +9,14 @@ import AddUser from '../src/containers/addUser'
 import './App.css'
 
 function fetchInventory() {
-    fetch(`http://localhost:3001/inventory?userId=${this.props.data.user.userId}`)
+    fetch(`https://apiserverdata.com/inventory?userId=${this.props.data.user.userId}`)
         .then(res => res.json())
         .then(list => {
             this.props.getInventory(list);
         });
 }
 function fetchUsers() {
-    fetch("http://localhost:3001/users/all")
+    fetch("https://apiserverdata.com/users/all")
         .then(res => res.json())
         .then(users => {
             this.props.getUsers(users);
@@ -32,7 +32,7 @@ function getLogoutButton() {
 }
 
 function fetchEditedInventory() {
-    fetch(`http://localhost:3001/inventory?userId=${this.props.data.user.userId}`)
+    fetch(`https://apiserverdata.com/inventory?userId=${this.props.data.user.userId}`)
         .then(res => res.json())
         .then(list => {
             this.props.getEditedInventory(list);

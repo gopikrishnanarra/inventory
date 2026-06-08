@@ -76,7 +76,7 @@ export default class ResetPassword extends React.Component {
 
     }
     async resetPassword() {
-        const updateUserUrl = `http://localhost:3001/users/resetUser?id=${this.state.id}`;
+        const updateUserUrl = `https://apiserverdata.com/users/resetUser?id=${this.state.id}`;
         if(this.state.reset && this.state.id.length > 0) {
             await axios.put(updateUserUrl,{userId: this.state.user, password: this.state.password});
             this.setState({
