@@ -67,7 +67,7 @@ constructor(props) {
 
     async saveEditInventory(id) {
         const list = this.props.props.data.editedInventory.filter(o => o._id.$oid === id);
-        const url = `https://apiserverdata.com/inventory/editItem?id=${id}`;
+        const url = `http://localhost:3001/inventory/editItem?id=${id}`;
         try {
             await axios.put(url, list[0]);
             this.props.props.editInventory();
@@ -78,7 +78,7 @@ constructor(props) {
     }
 
     async deleteInventory(id) {
-        const url = `https://apiserverdata.com/inventory/delete?id=${id}`;
+        const url = `http://localhost:3001/inventory/delete?id=${id}`;
         try {
             await axios.delete(url);
             this.props.props.deleteInventory();

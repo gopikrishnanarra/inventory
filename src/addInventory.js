@@ -206,7 +206,7 @@ class AddInventory extends React.Component {
     }
 
     async save() {
-            const url = 'https://apiserverdata.com/inventory/addItem';
+            const url = 'http://localhost:3001/inventory/addItem';
             await axios.post(url, this.props.data.previewList);
             this.reset();
             this.props.fetchInventory();
